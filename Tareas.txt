@@ -1,6 +1,6 @@
-Cifrado
+Cifrado X
 Cookies & Sesiones
 Objetos
 MVC
-Paginacion + sesiones
+Paginacion + sesiones X
 PUFOSA
