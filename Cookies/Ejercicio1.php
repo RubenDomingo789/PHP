@@ -5,6 +5,11 @@
 </head>
 
 <body>
+    <?php
+        if (isset($_COOKIE['nombre'])) {
+            header("location: Ejercicio1.2.php");
+        }
+    ?>
     <form method="post" action="Ejercicio1.2.php">
         <label for="color"> Color prferido </label></br>
         <input type="radio" name="color" value="lightblue" checked>Azul</input>
