@@ -1,6 +1,6 @@
 <?php
 $options = array('uri' => 'http://localhost/PHP/ServicioSOAP',
-    'location' => 'http://localhost/PHP/ServicioSOAP/SoapService.php');
+    'location' => 'http://localhost/PHP/ServicioSOAP/Prueba/SoapService.php');
 
 try {
     $cliente = new SoapClient(null, $options);

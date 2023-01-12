@@ -9,17 +9,19 @@ class Usuario extends Crud
     private $direccion;
     private $telefono;
     private $edad;
+    private $conexion;
     const Tabla = 'usuarios';
 
-    function __construct($nombre, $apellido, $sexo, $direccion, $telefono, $edad)
+    function __construct($nombre, $apellido, $sexo, $direccion, $telefono, $edad, $conexion)
     {
-        parent::__construct(self::Tabla, parent::conectar());
+        parent::__construct($conexion, self::Tabla);
         $this->nombre = $nombre;
         $this->apellido = $apellido;
         $this->sexo = $sexo;
         $this->direccion = $direccion;
         $this->telefono = $telefono;
         $this->edad = $edad;
+        $this->conexion = parent::conectar();
     }
 
     public function get_id()
@@ -90,8 +92,9 @@ class Usuario extends Crud
     public function crear()
     {
         try {
+            $conn = $this->conexion;
             $sql = "INSERT INTO " . self::Tabla . "VALUES (?, ?, ?, ?, ?, ?)";
-            $stmnt = $this->conn->prepare($sql);
+            $stmnt = $conn->prepare($sql);
             $stmnt->bindParam(1, $this->get_nombre());
             $stmnt->bindParam(2, $this->get_apellido());
             $stmnt->bindParam(3, $this->get_sexo());
@@ -101,8 +104,7 @@ class Usuario extends Crud
 
             $stmnt->execute();
             return 'La fila ha sido insertada con exito';
-            $this -> obtieneTodos();
-            
+            $this->obtieneTodos();
         } catch (PDOException $e) {
             return "Error: " . $e->getMessage();
         }

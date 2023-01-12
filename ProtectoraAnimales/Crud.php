@@ -3,19 +3,21 @@ include 'Conexion.php';
 abstract class Crud extends Conexion
 {
     private $tabla;
-    private $conn;
+    private $conexion;
 
     function __construct($tabla, $conn)
     {
+        parent::__construct($conn);
         $this->tabla = $tabla;
-        $this->conn = $conn;
+        $this->conexion = parent::conectar();
     }
 
     public function obtieneTodos()
     {
         try {
+            $conn=$this->conexion;
             $sql = "SELECT * FROM " . $this->tabla;
-            $objects = $this -> conn -> query($sql)->fetchAll(PDO::FETCH_OBJ);
+            $objects = $conn -> query($sql)->fetchAll(PDO::FETCH_OBJ);
             return $objects;
         } catch (PDOException $e) {
             return "Error: " . $e->getMessage();
@@ -25,8 +27,9 @@ abstract class Crud extends Conexion
     public function obtieneDeId($id)
     {
         try {
+            $conn=$this->conexion;
             $sql = "SELECT * FROM " . $this->tabla . " WHERE id = ?";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $conn->prepare($sql);
             $stmt->bindParam(1, $id);
 
             if ($stmt->execute()) {
@@ -40,7 +43,8 @@ abstract class Crud extends Conexion
     public function borrar($id)
     {
         try {
-            $stmt = $this->conn->prepare("DELETE FROM " . $this->tabla . " WHERE id = ?");
+            $conn=$this->conexion;
+            $stmt = $conn->prepare("DELETE FROM " . $this->tabla . " WHERE id = ?");
             $stmt->bindParam(1, $id);
             if ($stmt->execute()) {
                 return "Registro eliminado correctamente";
