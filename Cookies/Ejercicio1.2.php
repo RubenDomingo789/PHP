@@ -6,27 +6,25 @@
 
 <body>
     <?php
-    if (isset($_COOKIE['nombre'])) {
-        setcookie('nombre', $_COOKIE['nombre']);
-        setcookie('apellidos', $_COOKIE['apellidos']);
-        setcookie('color', $_COOKIE['color']);
-        setcookie('letra', $_COOKIE['letra']);
-        setcookie('font', $_COOKIE['font']);
+    if (isset($_POST['volver'])) {
+        setcookie('nombre', '', time() - 1);
+        setcookie('apellidos', '', time() - 1);
+        setcookie('color', '', time() - 1);
+        setcookie('letra', '', time() - 1);
+        setcookie('font', '', time() - 1);
+        header('Location:Ejercicio1.php');
+    } else if (isset($_COOKIE['nombre'])) {
     ?>
         <div style='background-color: <?= $_COOKIE['color'] ?>'>
             <p style="color: <?= $_COOKIE['letra'] ?>; font-family:<?= $_COOKIE['font'] ?>">Hola <?= $_COOKIE['nombre'] ?> <?= $_COOKIE['apellidos'] ?></p>
         </div>
-        <a href="Ejercicio1.php" <?php
-            setcookie('nombre', $_POST['nombre'], 0);
-            setcookie('apellidos', $_POST['apellidos'], 0);
-            setcookie('color', $_POST['color'], 0);
-            setcookie('letra', $_POST['letra'], 0);
-            setcookie('font', $_POST['font'], 0);
-            ?>>
-            Volver inicio
-        </a>
+        <form method="post" action="">
+            <button name="volver">
+                Volver inicio
+            </button>
+        </form>
     <?php
-    } else {
+    } else if (isset($_POST['nombre'])) {
     ?>
         <div style='background-color: <?= $_POST['color'] ?>'>
             <p style="color: <?= $_POST['letra'] ?>; font-family:<?= $_POST['font'] ?>">Hola <?= $_POST['nombre'] ?> <?= $_POST['apellidos'] ?></p>
@@ -38,15 +36,11 @@
         setcookie('letra', $_POST['letra']);
         setcookie('font', $_POST['font']);
         ?>
-        <a href="Ejercicio1.php" <?php
-            setcookie('nombre', $_POST['nombre'], 0);
-            setcookie('apellidos', $_POST['apellidos'], 0);
-            setcookie('color', $_POST['color'], 0);
-            setcookie('letra', $_POST['letra'], 0);
-            setcookie('font', $_POST['font'], 0);
-            ?>>
-            Volver inicio
-        </a>
+        <form method="post" action="">
+            <button name="volver">
+                Volver inicio
+            </button>
+        </form>
     <?php
     }
     ?>
