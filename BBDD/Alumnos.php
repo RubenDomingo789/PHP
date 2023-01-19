@@ -115,7 +115,7 @@
         </ul>
     <?php
         if (isset($_POST['botonEnviar'])) {
-            $stmnt = $conn->prepare("INSERT INTO alumnos (NOMBRE, APELLIDOS, TELEFONO, CORREO, LOGIN, PASSWORD) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmnt = $conn->prepare("INSERT INTO alumnos (NOMBRE, APELLIDOS, TELEFONO, CORREO, LOGIN, CONTRASEÑA) VALUES (?, ?, ?, ?, ?, ?)");
 
             $stmnt->bindParam(1, $nombre);
             $stmnt->bindParam(2, $apellidos);
