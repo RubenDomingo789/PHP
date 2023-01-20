@@ -1,8 +1,8 @@
 <?php
 //Llamada al modelo
-require_once("Login/Login.php");
 
-if (isset($_POST["botonEnviar"])){
+
+if ($_POST["usuario"]){
     header("Location:principal.php");
 }
 ?>

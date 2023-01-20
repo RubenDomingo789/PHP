@@ -101,16 +101,6 @@ body {
 	color: #7875B5;
 }
 
-.login__input {
-	border: none;
-	border-bottom: 2px solid #D1D1D4;
-	background: none;
-	padding: 10px;
-	padding-left: 24px;
-	font-weight: 700;
-	width: 75%;
-	transition: .2s;
-}
 
 .login__input:active,
 .login__input:focus,
