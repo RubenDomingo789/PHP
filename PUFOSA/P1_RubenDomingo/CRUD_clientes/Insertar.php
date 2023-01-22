@@ -4,9 +4,6 @@
 <head>
     <title>Insertar</title>
     <style scoped>
-        body {
-            background-color: #39ace7;
-        }
 
         select[type="text"] {
             width: 45% !important;

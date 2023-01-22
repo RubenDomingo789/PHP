@@ -1,40 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    <link rel="stylesheet" href="Estilos/Login.css">
-</head>
+<?php
+require "Modelos/Modelo.php";
+$modelo = new Modelo();
 
-<body>
-    <div class="container">
-        <div class="screen">
-            <div class="screen__content">
-                <form class="login">
-                    <div class="login__field">
-                        <i class="login__icon fas fa-user"></i>
-                        <input type="text" class="login__input" placeholder="Usuario" name="usuario">
-                    </div>
-                    <div class="login__field">
-                        <i class="login__icon fas fa-lock"></i>
-                        <input type="password" class="login__input" placeholder="Contraseña" name="password">
-                    </div>
-                    <button class="button login__submit" name="botonEnviar">
-                        <span class="button__text">Entrar</span>
-                        <i class="button__icon fas fa-chevron-right"></i>
-                    </button>
-                </form>
-            </div>
-            <div class="screen__background">
-                <span class="screen__background__shape screen__background__shape4"></span>
-                <span class="screen__background__shape screen__background__shape3"></span>
-                <span class="screen__background__shape screen__background__shape2"></span>
-                <span class="screen__background__shape screen__background__shape1"></span>
-            </div>
-        </div>
-    </div>
-</body>
+if (!isset($_POST['usuario'])) {
+    require_once("Login.php");
+}
 
-</html>
+if (isset($_POST["usuario"]) && isset($_POST["password"])) {
+    $resultado = $modelo->comprobarUser($_POST['usuario'], $_POST['password']);
+    if ($resultado != "") {
+        header("Location:Login.php?msg=$resultado");
+    } else {
+        session_start();
+        $_SESSION['usuario'] = $_POST['usuario'];
+    }
+}
+
+if (isset($_SESSION['usuario'])) {
+    $lista_viviendas = $modelo->mostrarViviendas();
+
+    //Paginacion
+    $num_total_filas = $modelo->totalViviendas();
+
+    if (isset($_GET['nPaginas'])) {
+        $nPaginas = $_GET['nPaginas'];
+    } else {
+        $nPaginas = 1;
+    }
+
+    $viviendas_pagina = 4;
+    $inicio = ($nPaginas - 1) * $viviendas_pagina;
+    $paginas = $num_total_filas / $viviendas_pagina;
+    $paginas = ceil($paginas);
+    require_once("Vista/Principal.php");
+}

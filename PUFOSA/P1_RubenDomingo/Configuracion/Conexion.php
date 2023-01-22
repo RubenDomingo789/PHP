@@ -2,7 +2,7 @@
 //Conexión a la BBDD
 $servidor = "localhost";
 $usuario = "root";
-$clave = "";
+$clave = "root";
 $dbname = "pufosa";
 $sql_inicial = "USE $dbname";
 
