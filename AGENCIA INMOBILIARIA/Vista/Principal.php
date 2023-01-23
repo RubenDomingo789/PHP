@@ -3,7 +3,6 @@
 <head>
     <title>Viviendas</title>
     <style>
-
         table {
             background-color: white;
             text-align: center;
@@ -87,7 +86,7 @@
                         <?php
                         for ($i = 0; $i < $row['nfotos']; $i++) {
                         ?>
-                            <a href="" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i+1 . ".jpg" ?>" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         <?php
                         } ?>
                     </td>
@@ -97,7 +96,7 @@
                     for ($i = 0; $i < $row['nfotos']; $i++) {
                     ?>
                         <td>
-                            <a href="" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="fotos/<?php echo $row['tipo'] . $i+1 ?>" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         </td>
                     <?php
                     } ?>
@@ -112,13 +111,15 @@
                 <?php
                 } ?>
                 <td>
-                    <form method="post" action="">
-                        <button class="edit"><i class='fas fa-edit' style='font-size:24px'></i></button>
+                    <form method="post" action="Controlador/ViviendaController.php">
+                        <button class="edit" name="editar"><i class='fas fa-edit' style='font-size:24px'></i></button>
+                        <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
                     </form>
                 </td>
                 <td>
-                    <form method="post" action="">
-                        <button class="trash"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
+                    <form method="post" action="Controlador/ViviendaController.php">
+                        <button class="trash" name="borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
+                        <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
                     </form>
                 </td>
             </tr>

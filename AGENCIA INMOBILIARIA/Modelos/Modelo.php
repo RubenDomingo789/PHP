@@ -91,4 +91,15 @@ class Modelo extends Conexion
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function borrarVivienda($id)
+    {
+        $conn = $this->conexion;
+        $sql = "DELETE FROM viviendas WHERE id = ?";
+        $query = $conn->prepare($sql);
+        $query->bindParam(1, $id);
+        $query->execute();
+        return 'La vivienda ha sido borrada correctamente';
+    }
+
 }
