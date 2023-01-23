@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+	<?php session_start()
+	?>
 	<title>Agencia Inmobiliaria</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,6 +35,7 @@
 	<?php
 	if (isset($_SESSION['usuario'])) {
 		session_destroy();
+		setcookie('conexion', date('d/m/y h:i:s'));
 	}
 	?>
 	<div class="limiter">

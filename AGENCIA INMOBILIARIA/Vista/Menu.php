@@ -16,6 +16,7 @@
         .topnav {
             overflow: hidden;
             background-color: #542854;
+            text-align: center;
         }
 
         .topnav a {
@@ -26,7 +27,7 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            font-size: 17px;
+            font-size: 20px;
         }
 
         .dropdown {
@@ -48,7 +49,14 @@
 
         div.icon {
             float: right;
-            margin-right: 10px;
+            margin-right: 18px;
+        }
+
+        div.icon1 {
+            float: right;
+            margin-right: 18px;
+            color: white;
+            margin-top: 13px;
         }
     </style>
 </head>
@@ -63,10 +71,15 @@
         </div>
         <p>
             <?php
-            $nombre = $_SESSION['usuario'];
-            echo 'Usuario: ' . $nombre;
+            $user = $_SESSION['usuario'];
+            if (isset($_COOKIE['conexion'])) {
+                echo ' Ultima conexion: ' . $_COOKIE['conexion'];
+            }
             ?>
         </p>
+        <div class="icon1">
+            <i class='far fa-user' title= 'Usuario: <?php echo $user ?>' style='font-size:24px'></i>
+        </div>
         <div class="icon">
             <a href="Login.php"><i class="fa fa-power-off" style="font-size:24px"></i></a>
         </div>

@@ -4,12 +4,9 @@
     <title>Ejercicio 1</title>
     <style>
         ul.pagination {
-            display: inline-block;
-            padding: 0;
-            margin: 0;
-            position: relative;
-            top: 128%;
-            left: 40%;
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
         }
 
         ul.pagination li {

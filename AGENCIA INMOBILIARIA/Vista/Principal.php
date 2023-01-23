@@ -3,13 +3,15 @@
 <head>
     <title>Viviendas</title>
     <style>
+
         table {
             background-color: white;
             text-align: center;
             border-collapse: collapse;
             width: 90%;
             margin: 0 auto;
-            margin-bottom: 70px;
+            margin-top: 30px;
+            font-size: 18px;
         }
 
         th,
@@ -38,14 +40,14 @@
 
         button.edit {
             background-color: #008CBA;
-            border-radius: 2px;
+            border-radius: 5px;
             width: 50px;
             height: 50px;
         }
 
         button.trash {
             background-color: #f44336;
-            border-radius: 2px;
+            border-radius: 5px;
             width: 50px;
             height: 50px;
         }
@@ -123,10 +125,10 @@
         <?php
         }
         ?>
-        <tr><?php
-            include('Paginacion.php');
-            ?></tr>
     </table>
+    <?php
+    include('Paginacion.php');
+    ?>
 </body>
 
 </html>
