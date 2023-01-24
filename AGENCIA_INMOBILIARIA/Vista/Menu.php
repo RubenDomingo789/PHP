@@ -19,7 +19,7 @@
             text-align: center;
         }
 
-        .topnav a {
+        .topnav button {
             margin-left: 20px;
             float: left;
             display: block;
@@ -28,6 +28,8 @@
             padding: 14px 16px;
             text-decoration: none;
             font-size: 20px;
+            border: none;
+            background-color: #542854;
         }
 
         .dropdown {
@@ -35,7 +37,7 @@
             overflow: hidden;
         }
 
-        .topnav a:hover,
+        .topnav button:hover,
         .dropdown:hover .dropbtn {
             background-color: #d147ed;
             color: white;
@@ -64,10 +66,10 @@
 <body>
     <div class="topnav" id="myTopnav">
         <div class="dropdown">
-            <a href="Principal.php">Viviendas</a>
+            <button href="Principal.php">Viviendas</button>
         </div>
         <div class="dropdown">
-            <a href="../InformesLog/InformeDepartamentos.php">Informe</a>
+            <button>Informe</button>
         </div>
         <p>
             <?php
@@ -78,10 +80,12 @@
             ?>
         </p>
         <div class="icon1">
-            <i class='far fa-user' title= 'Usuario: <?php echo $user ?>' style='font-size:24px'></i>
+            <i class='far fa-user' title='Usuario: <?php echo $user ?>' style='font-size:24px'></i>
         </div>
         <div class="icon">
-            <a href="Login.php"><i class="fa fa-power-off" style="font-size:24px"></i></a>
+            <form method='post' action='index.php'>
+                <button name="salir"><i class="fa fa-power-off" style="font-size:24px"></i></button>
+            </form>
         </div>
     </div>
 </body>

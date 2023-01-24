@@ -2,12 +2,6 @@
 <html lang="en">
 
 <head>
-	<?php
-	if (isset($_SESSION['usuario'])) {
-		session_destroy();
-		setcookie('conexion', date('d/m/y h:i:s'));
-	}
-	?>
 	<title>Agencia Inmobiliaria</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">

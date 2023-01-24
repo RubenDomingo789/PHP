@@ -1,6 +1,5 @@
 <?php
-require_once('Modelo/index.php');
-session_start();
+include_once('Modelo/index.php');
 
 class ModeloController
 {
@@ -13,14 +12,14 @@ class ModeloController
     static function index()
     {
         $modelo = new Modelo();
-        require_once("Login.php");
-        if (isset($_POST['usuario'])){
+        if (isset($_POST['botonEnviar'])){
             $resultado = $modelo->comprobarUser($_POST['usuario'], $_POST['password']);
-            if ($resultado != "") {
+            if ($resultado != '') {
                 header("Location:Login.php?msg=$resultado");
             } else {
+                session_start();
                 $_SESSION['usuario'] = $_POST['usuario'];
-                require_once('index.php');
+                require_once("index2.php");
             }
         }
     }

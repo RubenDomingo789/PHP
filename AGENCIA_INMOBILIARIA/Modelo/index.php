@@ -83,7 +83,7 @@ class Modelo extends Conexion
                     return $msg;
                 } else {
                     if (password_verify($pass_user, $pass_encrypt)) {
-                        $msg = "";
+                        return $msg= '';
                     }
                 }
             }
