@@ -2,7 +2,11 @@
 <html lang="en">
 
 <head>
-	<?php session_start()
+	<?php
+	if (isset($_SESSION['usuario'])) {
+		session_destroy();
+		setcookie('conexion', date('d/m/y h:i:s'));
+	}
 	?>
 	<title>Agencia Inmobiliaria</title>
 	<meta charset="UTF-8">
@@ -10,36 +14,30 @@
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="/stilos/images/icons/favicon.ico" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/vendor/animate/animate.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/vendor/css-hamburgers/hamburgers.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/vendor/animsition/css/animsition.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/vendor/select2/select2.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/vendor/daterangepicker/daterangepicker.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="Estilos/css/util.css">
-	<link rel="stylesheet" type="text/css" href="Estilos/css/main.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/css/util.css">
+	<link rel="stylesheet" type="text/css" href="Vista/Estilos/css/main.css">
 	<!--===============================================================================================-->
 </head>
 
 <body>
-	<?php
-	if (isset($_SESSION['usuario'])) {
-		session_destroy();
-		setcookie('conexion', date('d/m/y h:i:s'));
-	}
-	?>
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('Estilos/images/fondo.jpg');">
+		<div class="container-login100" style="background-image: url('Vista/Estilos/images/fondo.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
 					AGENCIA INMOBILIARIA
@@ -70,21 +68,21 @@
 	<div id="dropDownSelect1"></div>
 
 	<!--===============================================================================================-->
-	<script src="Estilos/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="Vista/Estilos/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="Estilos/vendor/animsition/js/animsition.min.js"></script>
+	<script src="Vista/Estilos/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="Estilos/vendor/bootstrap/js/popper.js"></script>
-	<script src="Estilos/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="Vista/Estilos/vendor/bootstrap/js/popper.js"></script>
+	<script src="Vista/Estilos/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="Estilos/vendor/select2/select2.min.js"></script>
+	<script src="Vista/Estilos/vendor/select2/select2.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="Estilos/vendor/daterangepicker/moment.min.js"></script>
-	<script src="Estilos/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="Vista/Estilos/vendor/daterangepicker/moment.min.js"></script>
+	<script src="Vista/Estilos/vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script src="Estilos/vendor/countdowntime/countdowntime.js"></script>
+	<script src="Vista/Estilos/vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
-	<script src="Estilos/js/main.js"></script>
+	<script src="Vista/Estilos/js/main.js"></script>
 
 </body>
 

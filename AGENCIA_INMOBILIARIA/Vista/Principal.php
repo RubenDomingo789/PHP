@@ -50,6 +50,9 @@
             width: 50px;
             height: 50px;
         }
+        a {
+            
+        }
     </style>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
@@ -86,7 +89,7 @@
                         <?php
                         for ($i = 0; $i < $row['nfotos']; $i++) {
                         ?>
-                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i+1 . ".jpg" ?>" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i+1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         <?php
                         } ?>
                     </td>
@@ -96,7 +99,7 @@
                     for ($i = 0; $i < $row['nfotos']; $i++) {
                     ?>
                         <td>
-                            <a href="fotos/<?php echo $row['tipo'] . $i+1 ?>" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i+1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         </td>
                     <?php
                     } ?>
