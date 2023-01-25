@@ -5,7 +5,7 @@
     <?php
     if (!isset($_SESSION['usuario'])) {
         session_start();
-    }    
+    }
     ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,7 +71,9 @@
 <body>
     <div class="topnav" id="myTopnav">
         <div class="dropdown">
-            <button href="Principal.php">Viviendas</button>
+            <form method='post' action='index2.php'>
+                <button>Viviendas</button>
+            </form>
         </div>
         <div class="dropdown">
             <button>Informe</button>

@@ -1,17 +1,17 @@
 <?php
-require 'Conexion.php';
-class Modelo extends Conexion
+require_once('Conexion.php');
+class Usuario extends Conexion
 {
     private $conexion;
-    private $model;
+    private $usuarios;
 
     public function __construct()
     {
-        $this->model = array();
+        $this->usuarios = array();
         $this->conexion = Conexion::conectar();
     }
 
-    public function mostrarViviendas($inicio, $fin)
+    public function mostrarUsuarios($inicio, $fin)
     {
         try {
             $conn = $this->conexion;
@@ -20,24 +20,9 @@ class Modelo extends Conexion
             GROUP BY viviendas.id
             ORDER BY fecha_anuncio DESC LIMIT $inicio, $fin";
             foreach ($conn->query($sql) as $row) {
-                $this->model[] = $row;
+                $this->usuarios[] = $row;
             }
-            return $this->model;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-    public function mostrarFotos($id)
-    {
-        try {
-            $conn = $this->conexion;
-            $sql = "SELECT foto FROM fotos WHERE id_vivienda = ?";
-            $query = $conn->prepare($sql);
-            $query->bindParam(1, $id);
-            $query->execute();
-            $result = $query->fetch(PDO::FETCH_ASSOC);
-            return $result;
+            return $this->usuarios;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -77,15 +62,5 @@ class Modelo extends Conexion
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-    }
-
-    public function borrarVivienda($id)
-    {
-        $conn = $this->conexion;
-        $sql = "DELETE FROM viviendas WHERE id = ?";
-        $query = $conn->prepare($sql);
-        $query->bindParam(1, $id);
-        $query->execute();
-        return 'La vivienda ha sido borrada correctamente';
     }
 }

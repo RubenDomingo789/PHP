@@ -13,8 +13,7 @@ class Paginacion extends Conexion
 	function __construct()
 	{
 		$this->conexion = Conexion::conectar();
-		$this->elementos_pagina = 5;
-		$this->nPaginas = 1;
+		$this->elementos_pagina = 4;
 	}
 
 	public function total($tabla)
