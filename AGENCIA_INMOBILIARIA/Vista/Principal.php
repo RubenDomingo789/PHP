@@ -2,6 +2,8 @@
 
 <head>
     <title>Viviendas</title>
+    <?php
+    ?>
     <style>
         table {
             background-color: white;
@@ -49,9 +51,6 @@
             border-radius: 5px;
             width: 50px;
             height: 50px;
-        }
-        a {
-            
         }
     </style>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>

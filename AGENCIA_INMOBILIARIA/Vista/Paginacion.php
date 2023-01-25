@@ -40,30 +40,30 @@
 
 <body>
     <ul class="pagination">
-        <li class="<?php if ($nPaginas <= 1) {
+        <li class="<?php if ($nPagina <= 1) {
                         echo 'disabled';
                     } ?>">
-            <a href="<?php if ($nPaginas <= 1) {
-                            echo '#';
+            <a href="<?php if ($nPagina <= 1) {
+                            echo 'index2.php';
                         } else {
-                            echo "?nPaginas=" . ($nPaginas - 1);
+                            echo "?nPagina=" . ($nPagina - 1);
                         } ?>">Anterior
             </a>
         </li>
         <?php for ($i = 1; $i <= $paginas; $i++) { ?>
             <li>
-                <a href="<?php echo "?nPaginas=" . $i; ?>">
+                <a href="index2.php<?php echo "?nPagina=" . $i; ?>">
                     <?php echo $i ?>
                 </a>
             </li>
         <?php } ?>
-        <li class="<?php if ($nPaginas >= $paginas) {
+        <li class="<?php if ($nPagina >= $paginas) {
                         echo 'disabled';
                     } ?>">
-            <a href="<?php if ($nPaginas >= $paginas) {
-                            echo '#';
+            <a href="<?php if ($nPagina >= $paginas) {
+                            echo 'index2.php';
                         } else {
-                            echo "?nPaginas=" . ($nPaginas + 1);
+                            echo "?nPagina=" . ($nPagina + 1);
                         } ?>">Siguiente
             </a>
         </li>

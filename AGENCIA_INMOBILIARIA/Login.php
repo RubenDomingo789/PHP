@@ -3,6 +3,11 @@
 
 <head>
 	<title>Agencia Inmobiliaria</title>
+	<?php
+	if (!isset($_SESSION['usuario'])) {
+		session_start();
+	}
+	?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -30,6 +35,12 @@
 </head>
 
 <body>
+	<?php
+	if (isset($_SESSION['usuario'])) {
+		session_destroy();
+		setcookie('conexion', date('d/m/y h:i:s'));
+	}
+	?>
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('Vista/Estilos/images/fondo.jpg');">
 			<div class="wrap-login100 p-t-30 p-b-50">

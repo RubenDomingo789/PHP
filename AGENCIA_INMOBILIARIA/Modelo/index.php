@@ -11,14 +11,14 @@ class Modelo extends Conexion
         $this->conexion = Conexion::conectar();
     }
 
-    public function mostrarViviendas()
+    public function mostrarViviendas($inicio, $fin)
     {
         try {
             $conn = $this->conexion;
             $sql = "SELECT viviendas.*, COUNT(fotos.foto) AS 'nfotos'  FROM inmobiliaria.viviendas 
             LEFT JOIN fotos ON fotos.id_vivienda = viviendas.id
             GROUP BY viviendas.id
-            ORDER BY fecha_anuncio DESC";
+            ORDER BY fecha_anuncio DESC LIMIT $inicio, $fin";
             foreach ($conn->query($sql) as $row) {
                 $this->model[] = $row;
             }
@@ -38,19 +38,6 @@ class Modelo extends Conexion
             $query->execute();
             $result = $query->fetch(PDO::FETCH_ASSOC);
             return $result;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-    public function totalViviendas()
-    {
-        try {
-            $conn = $this->conexion;
-            $result = $conn->query('SELECT COUNT(*) AS total_viviendas FROM viviendas');
-            $row = $result->fetch();
-            $num_total_filas = $row['total_viviendas'];
-            return $num_total_filas;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -101,5 +88,4 @@ class Modelo extends Conexion
         $query->execute();
         return 'La vivienda ha sido borrada correctamente';
     }
-
 }

@@ -1,18 +1,13 @@
 <?php
 include_once('Modelo/index.php');
+include_once('Modelo/Paginacion.php');
 
 class ModeloController
 {
-    private $model;
-    public function __construct()
-    {
-        $this->model = new Modelo();
-    }
-
     static function index()
     {
         $modelo = new Modelo();
-        if (isset($_POST['botonEnviar'])){
+        if (isset($_POST['botonEnviar'])) {
             $resultado = $modelo->comprobarUser($_POST['usuario'], $_POST['password']);
             if ($resultado != '') {
                 header("Location:Login.php?msg=$resultado");
@@ -24,9 +19,15 @@ class ModeloController
         }
     }
 
-    static function viviendas(){
+    static function viviendas()
+    {
         $modelo = new Modelo();
-        $lista_viviendas = $modelo->mostrarViviendas();
+        $paginacion = new Paginacion();
+        $paginas = $paginacion->total('viviendas');
+        $fin = $paginacion->getProperty('elementos_pagina');
+        $inicio = $paginacion->inicio();
+
+        $lista_viviendas = $modelo->mostrarViviendas($inicio, $fin);
         require_once("Vista/Principal.php");
 
         if (isset($_POST['editar'])) {
