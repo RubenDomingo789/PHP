@@ -52,14 +52,30 @@
             width: 50px;
             height: 50px;
         }
+
+        .alert {
+            position: absolute;
+            margin-top: 20px;
+            background-color: darkmagenta;
+            left: 380px;
+            padding: 10px;
+        }
     </style>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
+<script>
+    <?php if ($result != "") {
+    ?>alert("<?= $result ?>")
+    <?php
+    } ?>
+</script>
 
 <body>
     <?php
     include('Menu.php');
     ?>
+    <br>
+    <br>
     <table>
         <tr>
             <th>ID</th>
@@ -88,7 +104,7 @@
                         <?php
                         for ($i = 0; $i < $row['nfotos']; $i++) {
                         ?>
-                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i+1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i + 1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         <?php
                         } ?>
                     </td>
@@ -98,7 +114,7 @@
                     for ($i = 0; $i < $row['nfotos']; $i++) {
                     ?>
                         <td>
-                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i+1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i + 1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         </td>
                     <?php
                     } ?>
@@ -113,13 +129,13 @@
                 <?php
                 } ?>
                 <td>
-                    <form method="post" action="Controlador/ViviendaController.php">
+                    <form method="post" action="index2.php">
                         <button class="edit" name="editar"><i class='fas fa-edit' style='font-size:24px'></i></button>
                         <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
                     </form>
                 </td>
                 <td>
-                    <form method="post" action="Controlador/ViviendaController.php">
+                    <form method="post" action="index2.php">
                         <button class="trash" name="borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
                         <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
                     </form>
@@ -129,6 +145,7 @@
         }
         ?>
     </table>
+    <br>
     <?php
     include('Paginacion.php');
     ?>

@@ -58,7 +58,7 @@
         <?php } ?>
         <li>
             <a href="<?php if ($nPaginas >= $paginas) {
-                            echo "index2.php?nPaginas=" . $nPaginas;
+                            echo "index2.php";
                         } else {
                             echo "index2.php?nPaginas=" . ($nPaginas + 1);
                         } ?>">Siguiente

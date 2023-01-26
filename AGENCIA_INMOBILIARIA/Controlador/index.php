@@ -1,7 +1,7 @@
 <?php
-include_once('Modelo/Usuario.php');
-include_once('Modelo/Vivienda.php');
-include_once('Modelo/Paginacion.php');
+require_once('Modelo/Usuario.php');
+require_once('Modelo/Vivienda.php');
+require_once('Modelo/Paginacion.php');
 
 class ModeloController
 {
@@ -23,8 +23,9 @@ class ModeloController
     static function viviendas()
     {
         $modelo = new Vivienda();
-        $paginacion = new Paginacion();
 
+        /************Paginacion****************/ 
+        $paginacion = new Paginacion();
         if (isset($_GET['nPaginas'])) {
             $nPaginas = $paginacion->setProperty('nPaginas', $_GET['nPaginas']);
         }
@@ -35,6 +36,11 @@ class ModeloController
         $fin = $paginacion->getProperty('elementos_pagina');
         $inicio = $paginacion->inicio();
 
+        /************Botones****************/ 
+        if (isset($_POST['borrar'])) {
+            $id = $_POST['id'];
+            $result = $modelo -> borrarVivienda($id);
+        }
         $lista_viviendas = $modelo->mostrarViviendas($inicio, $fin);
         require_once("Vista/Principal.php");
     }
