@@ -3,65 +3,9 @@
 <head>
     <title>Viviendas</title>
     <?php
+    include('Menu.php');
+    include_once('Estilos/Styles.php');
     ?>
-    <style>
-        table {
-            background-color: white;
-            text-align: center;
-            border-collapse: collapse;
-            width: 90%;
-            margin: 0 auto;
-            margin-top: 30px;
-            font-size: 18px;
-        }
-
-        th,
-        td {
-            padding: 20px;
-        }
-
-        th {
-            background-color: #542854;
-            border-bottom: solid 5px #0F362D;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #ed8ced;
-        }
-
-        tr:nth-child(odd) {
-            background-color: white;
-        }
-
-        tr:hover td {
-            background-color: #d147ed;
-            color: white;
-        }
-
-        button.edit {
-            background-color: #008CBA;
-            border-radius: 5px;
-            width: 50px;
-            height: 50px;
-        }
-
-        button.trash {
-            background-color: #f44336;
-            border-radius: 5px;
-            width: 50px;
-            height: 50px;
-        }
-
-        .alert {
-            position: absolute;
-            margin-top: 20px;
-            background-color: darkmagenta;
-            left: 380px;
-            padding: 10px;
-        }
-    </style>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <script>
     <?php if ($result != "") {
@@ -71,14 +15,10 @@
 </script>
 
 <body>
-    <?php
-    include('Menu.php');
-    ?>
     <br>
     <br>
     <table>
         <tr>
-            <th>ID</th>
             <th>TIPO VIVIENDA</th>
             <th>ZONA</th>
             <th>Nº DORMITORIOS</th>
@@ -91,7 +31,6 @@
         foreach ($lista_viviendas as $row) {
         ?>
             <tr>
-                <td><?php echo $row['id'] ?></td>
                 <td><?php echo $row['tipo'] ?></td>
                 <td><?php echo $row['zona'] ?></td>
                 <td><?php echo $row['ndormitorios'] ?></td>
@@ -132,6 +71,11 @@
                     <form method="post" action="index2.php">
                         <button class="edit" name="editar"><i class='fas fa-edit' style='font-size:24px'></i></button>
                         <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
+                        <input type="hidden" name="tipo" value="<?php echo $row['tipo'] ?>" />
+                        <input type="hidden" name="zona" value="<?php echo $row['zona'] ?>" />
+                        <input type="hidden" name="ndormitorios" value="<?php echo $row['ndormitorios'] ?>" />
+                        <input type="hidden" name="tamano" value="<?php echo $row['tamano'] ?>" />
+                        <input type="hidden" name="precio" value="<?php echo $row['precio'] ?>" />
                     </form>
                 </td>
                 <td>
