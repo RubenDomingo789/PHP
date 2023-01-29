@@ -28,6 +28,8 @@
             <th colspan="2">ACCIONES</th>
         </tr>
         <?php
+        $contArray = 0;
+        $contArray2 = 0;
         foreach ($lista_viviendas as $row) {
         ?>
             <tr>
@@ -43,9 +45,12 @@
                         <?php
                         for ($i = 0; $i < $row['nfotos']; $i++) {
                         ?>
-                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i + 1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="Vista/fotos/<?php echo $fotos[$contArray][$contArray2]['foto'] ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         <?php
-                        } ?>
+                            $contArray2++;
+                        }
+                        $contArray2 = 0;
+                        $contArray++ ?>
                     </td>
                     <?php
                 }
@@ -53,9 +58,10 @@
                     for ($i = 0; $i < $row['nfotos']; $i++) {
                     ?>
                         <td>
-                            <a href="Vista/fotos/<?php echo strtolower($row['tipo']) . $i + 1 . ".jpg" ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
+                            <a href="Vista/fotos/<?php echo $fotos[$contArray][$contArray2]['foto'] ?>" target="_blank" style="text-decoration: none">Foto <?php echo $i + 1 . '&nbsp&nbsp&nbsp' ?></a>
                         </td>
                     <?php
+                        $contArray++;
                     } ?>
                     </td>
                 <?php
@@ -63,6 +69,7 @@
                 ?>
                 <?php
                 if ($row['nfotos'] == 0) {
+                    $contArray++;
                 ?>
                     <td></td>
                 <?php

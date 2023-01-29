@@ -38,7 +38,7 @@ class Vivienda extends Conexion
             $query = $conn->prepare($sql);
             $query->bindParam(1, $id);
             $query->execute();
-            $result = $query->fetch(PDO::FETCH_ASSOC);
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -73,7 +73,8 @@ class Vivienda extends Conexion
         }
     }
 
-    public function editarVivienda($id, $tipo, $zona, $ndormitorios, $precio, $tamano){
+    public function editarVivienda($id, $tipo, $zona, $ndormitorios, $precio, $tamano)
+    {
         try {
             $conn = $this->conexion;
             $sql = "UPDATE viviendas SET tipo = ?, zona = ?, ndormitorios = ?, 
@@ -87,8 +88,29 @@ class Vivienda extends Conexion
             $stmnt->bindParam(6, $id);
             $stmnt->execute();
             return 'La vivienda ha sido modificada correctamente';
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
-        catch (PDOException $e) {
+    }
+
+    public function insertarVivienda($tipo, $zona, $direccion, $ndormitorios, $precio, $tamano, $extras, $observaciones, $fecha_anuncio)
+    {
+        try {
+            $conn = $this->conexion;
+            $sql = "INSERT INTO viviendas VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmnt = $conn->prepare($sql);
+            $stmnt->bindParam(1, $tipo);
+            $stmnt->bindParam(2, $zona);
+            $stmnt->bindParam(3, $direccion);
+            $stmnt->bindParam(4, $ndormitorios);
+            $stmnt->bindParam(5, $precio);
+            $stmnt->bindParam(6, $tamano);
+            $stmnt->bindParam(6, $extras);
+            $stmnt->bindParam(6, $observaciones);
+            $stmnt->bindParam(6, $fecha_anuncio);
+            $stmnt->execute();
+            return 'El anuncio ha sido publicado correctamente';
+        } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }

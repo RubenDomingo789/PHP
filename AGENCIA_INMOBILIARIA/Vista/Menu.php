@@ -30,7 +30,7 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            font-size: 20px;
+            font-size: 21px;
             border: none;
             background-color: #542854;
         }
@@ -71,11 +71,18 @@
     <div class="topnav" id="myTopnav">
         <div class="dropdown">
             <form method='post' action='index2.php'>
-                <button>Viviendas</button>
+                <button name="viviendas">Viviendas</button>
             </form>
         </div>
         <div class="dropdown">
-            <button>Informe</button>
+            <form method='post' action='index2.php'>
+                <button name="anuncios">Publicar Anuncio</button>
+            </form>
+        </div>
+        <div class="dropdown">
+            <form method='post' action='index2.php'>
+                <button name="buscar">Buscar Viviendas</button>
+            </form>
         </div>
         <p>
             <?php

@@ -44,9 +44,7 @@ class ModeloController
             $tipos_vivienda = $modelo->tipoVivienda();
             $zonas_vivienda = $modelo->zonaVivienda();
             require_once("Vista/Editar.php");
-        }
-
-        else {
+        } else {
             /************Paginacion****************/
             if (isset($_GET['result'])) {
                 $result = $_GET['result'];
@@ -60,8 +58,23 @@ class ModeloController
             $paginas = $paginacion->total('viviendas');
             $fin = $paginacion->getProperty('elementos_pagina');
             $inicio = $paginacion->inicio();
+
+            /*Mostrar viviendas y fotos*/
             $lista_viviendas = $modelo->mostrarViviendas($inicio, $fin);
+            $fotos = [];
+            foreach ($lista_viviendas as $row) {
+                $foto = $modelo->mostrarFotos($row['id']);
+                array_push($fotos, $foto);
+            }
             require_once("Vista/Principal.php");
         }
+    }
+
+    static function publicarAnuncio()
+    {
+        $modelo = new Vivienda();
+        $tipos_vivienda = $modelo->tipoVivienda();
+        $zonas_vivienda = $modelo->zonaVivienda();
+        require_once("Vista/Insertar.php");
     }
 }
