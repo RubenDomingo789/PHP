@@ -15,19 +15,21 @@
             <h1 style="color: white;">EDITAR VIVIENDA</h1>
             <hr>
             <br>
+            <?php
+            print_r($element3)
+            ?>
             <form method="post" action="index2.php">
-                <?php print_r($tipos_vivienda)?>
                 <label for="tipo_tipo">TIPO DE VIVIENDA: </label>
                 <select type="text" name="tipo" required>
                     <?php
                     foreach ($tipos_vivienda as $row) :
-                        if ($row["tipo"] == $_POST['tipo']) {
+                        if ($row == $_POST['tipo']) {
                     ?>
-                            <option value="<?= $row["tipo"] ?>" selected="selected"><?= $row["tipo"] ?></option>
+                            <option value="<?= $row ?>" selected="selected"><?= $row ?></option>
                         <?php
                         } else {
                         ?>
-                            <option value="<?= $row["tipo"] ?>"><?= $row["tipo"] ?></option>
+                            <option value="<?= $row ?>"><?= $row ?></option>
                     <?php
                         }
                     endforeach;
@@ -37,20 +39,34 @@
                 <select type="text" name="zona" required>
                     <?php
                     foreach ($zonas_vivienda as $row) :
-                        if ($row["zona"] == $_POST['zona']) {
+                        if ($row == $_POST['zona']) {
                     ?>
-                            <option value="<?= $row["zona"] ?>" selected="selected"><?= $row["zona"] ?></option>
+                            <option value="<?= $row ?>" selected="selected"><?= $row ?></option>
                         <?php
                         } else {
                         ?>
-                            <option value="<?= $row["zona"] ?>"><?= $row["zona"] ?></option>
+                            <option value="<?= $row ?>"><?= $row ?></option>
                     <?php
                         }
                     endforeach;
                     ?>
                 </select>
                 <label for="tipo_tipo">Nº DORMITORIOS: </label>
-                <input type="number" min="1" max="5" step="1" placeholder="Nº dormitorios" name="ndormitorios" value="<?= $_POST['ndormitorios'] ?>" required/>
+                <select type="number" name="ndormitorios" required>
+                    <?php
+                    foreach ($ndormitorios as $row) :
+                        if ($row == $_POST['ndormitorios']) {
+                    ?>
+                            <option value="<?= $row ?>" selected="selected"><?= $row ?></option>
+                        <?php
+                        } else {
+                        ?>
+                            <option value="<?= $row ?>"><?= $row ?></option>
+                    <?php
+                        }
+                    endforeach;
+                    ?>
+                </select>
                 <label for="tipo_tipo"> PRECIO: </label>
                 <input type="number" min="1" placeholder="Precio" name="precio" value="<?= $_POST['precio'] ?>" required/>
                 <label for="tipo_tipo"> TAMAÑO: </label>

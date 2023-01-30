@@ -30,7 +30,7 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            font-size: 21px;
+            font-size: 19px;
             border: none;
             background-color: #542854;
         }

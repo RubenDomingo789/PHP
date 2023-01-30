@@ -41,9 +41,11 @@ class ModeloController
                 header("location: index2.php");
             }
 
-            $enumList = $modelo->tipoVivienda();
-            $tipos_vivienda = explode("''", $enumList[0]);
-            $zonas_vivienda = $modelo->zonaVivienda();
+            $tipos = $modelo->getEnum('tipo');
+            $element1 = substr($tipos, 6, 4);
+            $element2 = substr($tipos, 13, 7);
+            $element3 = substr($tipos, 23, 6);
+            $element3 = substr($tipos, 32, 4);
             require_once("Vista/Editar.php");
         } else {
             /************Paginacion****************/
@@ -74,8 +76,7 @@ class ModeloController
     static function publicarAnuncio()
     {
         $modelo = new Vivienda();
-        //$tipos_vivienda = $modelo->tipoVivienda();
-        $zonas_vivienda = $modelo->zonaVivienda();
+        $tipos_vivienda = $modelo->getEnum('zona');
         require_once("Vista/Insertar.php");
     }
 }

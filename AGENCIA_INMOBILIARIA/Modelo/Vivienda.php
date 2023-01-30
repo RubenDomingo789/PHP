@@ -6,6 +6,7 @@ class Vivienda extends Conexion
     private $viviendas;
     private $tipos;
     private $zonas;
+    private $ndormitorios;
 
     public function __construct()
     {
@@ -45,29 +46,36 @@ class Vivienda extends Conexion
         }
     }
 
-    public function tipoVivienda()
+    public function getEnum($campo)
     {
         try {
             $conn = $this->conexion;
-            $sql = "SELECT column_type FROM information_schema.COLUMNS WHERE column_name = 'tipo'";
-            foreach ($conn->query($sql) as $row) {
-                $this->tipos[] = $row[0];
-            }
-            return $this->tipos;
+            $sql = "SELECT column_type FROM information_schema.COLUMNS WHERE column_name = ?";
+            $query = $conn->prepare($sql);
+            $query->bindParam(1, $campo);
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC)['COLUMN_TYPE'];
+            return $result;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
-    public function zonaVivienda()
+    public function extras()
     {
         try {
             $conn = $this->conexion;
-            $sql = "SELECT DISTINCT(zona) FROM viviendas";
+            $sql = "SELECT column_type FROM information_schema.COLUMNS WHERE column_name = 'extras'";
             foreach ($conn->query($sql) as $row) {
-                $this->zonas[] = $row;
+                $this->ndormitorios[] = $row[0];
             }
-            return $this->zonas;
+            $parentesis = explode("(", $this->ndormitorios[0]);
+            $array = explode(",", $parentesis[1]);
+            $array[4] = substr($array[4], 1, -2);
+            for ($i = 0; $i <= 3; $i++) {
+                $array[$i] = substr($array[$i], 1, -1);
+            }
+            return $array;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

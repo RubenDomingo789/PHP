@@ -49,8 +49,10 @@
         background-color: #d147ed;
     }
 
+    input[type="text"],
     input[type="number"],
-    select[type="text"] {
+    select[type="text"],
+    select[type="number"] {
         background-color: white;
         border: none;
         color: #0d0d0d;
@@ -80,8 +82,8 @@
         width: 65% !important;
     }
 
-    input[name="ndormitorios"] {
-        width: 55.5% !important;
+    select[name="ndormitorios"] {
+        width: 65% !important;
     }
 
     input[name="precio"] {
