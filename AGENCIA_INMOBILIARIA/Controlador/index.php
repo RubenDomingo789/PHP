@@ -41,7 +41,8 @@ class ModeloController
                 header("location: index2.php");
             }
 
-            $tipos_vivienda = $modelo->tipoVivienda();
+            $enumList = $modelo->tipoVivienda();
+            $tipos_vivienda = explode("''", $enumList[0]);
             $zonas_vivienda = $modelo->zonaVivienda();
             require_once("Vista/Editar.php");
         } else {
@@ -73,7 +74,7 @@ class ModeloController
     static function publicarAnuncio()
     {
         $modelo = new Vivienda();
-        $tipos_vivienda = $modelo->tipoVivienda();
+        //$tipos_vivienda = $modelo->tipoVivienda();
         $zonas_vivienda = $modelo->zonaVivienda();
         require_once("Vista/Insertar.php");
     }

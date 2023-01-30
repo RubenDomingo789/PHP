@@ -16,6 +16,7 @@
             <hr>
             <br>
             <form method="post" action="index2.php">
+                <?php print_r($tipos_vivienda)?>
                 <label for="tipo_tipo">TIPO DE VIVIENDA: </label>
                 <select type="text" name="tipo" required>
                     <?php

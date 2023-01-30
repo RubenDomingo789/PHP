@@ -49,9 +49,9 @@ class Vivienda extends Conexion
     {
         try {
             $conn = $this->conexion;
-            $sql = "SELECT DISTINCT(tipo) FROM viviendas";
+            $sql = "SELECT column_type FROM information_schema.COLUMNS WHERE column_name = 'tipo'";
             foreach ($conn->query($sql) as $row) {
-                $this->tipos[] = $row;
+                $this->tipos[] = $row[0];
             }
             return $this->tipos;
         } catch (PDOException $e) {
