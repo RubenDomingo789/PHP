@@ -85,11 +85,11 @@ class Vivienda extends Conexion
         }
     }
 
-    public function insertarVivienda($tipo, $zona, $direccion, $ndormitorios, $precio, $tamano, $extras, $observaciones, $fecha_anuncio)
+    public function insertarVivienda($tipo, $zona, $direccion, $ndormitorios, $precio, $tamano, $extras, $observaciones)
     {
         try {
             $conn = $this->conexion;
-            $sql = "INSERT INTO viviendas VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO viviendas (tipo, zona, direccion, ndormitorios, precio, tamano, extras, observaciones) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmnt = $conn->prepare($sql);
             $stmnt->bindParam(1, $tipo);
             $stmnt->bindParam(2, $zona);
@@ -97,9 +97,8 @@ class Vivienda extends Conexion
             $stmnt->bindParam(4, $ndormitorios);
             $stmnt->bindParam(5, $precio);
             $stmnt->bindParam(6, $tamano);
-            $stmnt->bindParam(6, $extras);
-            $stmnt->bindParam(6, $observaciones);
-            $stmnt->bindParam(6, $fecha_anuncio);
+            $stmnt->bindParam(7, $extras);
+            $stmnt->bindParam(8, $observaciones);
             $stmnt->execute();
             return 'El anuncio ha sido publicado correctamente';
         } catch (PDOException $e) {

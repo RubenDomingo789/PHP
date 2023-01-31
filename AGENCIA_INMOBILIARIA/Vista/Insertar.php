@@ -27,7 +27,8 @@
             box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
             text-align: center;
             margin-top: 40px;
-            padding: 20PX;
+            padding: 20px;
+            margin-bottom: 40px;
         }
 
         #campos {
@@ -64,7 +65,7 @@
             -ms-transition: all 0.3s ease-in-out;
             -o-transition: all 0.3s ease-in-out;
             transition: all 0.3s ease-in-out;
-            margin-left: 17% !important;
+            margin-left: 35% !important;
         }
 
         input[type="submit"]:hover {
@@ -138,11 +139,6 @@
             margin: 10px;
             width: 84%;
             border: 2px solid #f6f6f6;
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-            -ms-transition: all 0.5s ease-in-out;
-            -o-transition: all 0.5s ease-in-out;
-            transition: all 0.5s ease-in-out;
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
             margin-right: 20px !important;
@@ -166,9 +162,9 @@
         <div id="contenido">
             <h1 style="color: white;">NUEVO ANUNCIO</h1>
             <hr>
-            <div id="campos">
-                <div id="flex">
-                    <form method="post" action="index2.php">
+            <form method="post" action="index2.php">
+                <div id="campos">
+                    <div id="flex">
                         <label for="tipo_tipo">TIPO DE VIVIENDA: </label>
                         <select type="text" name="tipo" required>
                             <?php
@@ -202,38 +198,39 @@
                             }
                             ?>
                         </select>
-                    </form>
-                </div>
-                <div id="flex2">
-                    <label for="tipo_tipo">PRECIO: </label>
-                    <input type="number" min="1" name="precio" required />
 
-                    <label for="tipo_tipo">TAMAÑO: </label>
-                    <input type="number" min="1" name="tamano" required />
+                    </div>
+                    <div id="flex2">
+                        <label for="tipo_tipo">PRECIO: </label>
+                        <input type="number" min="1" name="precio" required />
 
-                    <label for="tipo_tipo">FECHA DE ANUNCIO: </label>
-                    <input type="date" name="fecha" value="<?php echo date('Y-m-d') ?>" disabled />
+                        <label for="tipo_tipo">TAMAÑO: </label>
+                        <input type="number" min="1" name="tamano" required />
 
-                    <div id="cuadroCheckbox">
-                        <label for="tipo_tipo">EXTRAS: </label>
-                        <div id="checkbox">
-                            <?php
-                            foreach ($extras as $row) {
-                            ?>
-                                <input type="checkbox" name="extras" value="<?php echo $row ?>" />
-                                <span class="checkmark"><?php echo $row ?></span>
-                            <?php
-                            }
-                            ?>
+                        <label for="tipo_tipo">FECHA DE ANUNCIO: </label>
+                        <input type="date" name="fecha" value="<?php echo date('Y-m-d') ?>" disabled />
+
+                        <div id="cuadroCheckbox">
+                            <label for="tipo_tipo">EXTRAS: </label>
+                            <div id="checkbox">
+                                <?php
+                                foreach ($extras as $row) {
+                                ?>
+                                    <input type="checkbox" name="extras[]" value="<?php echo $row ?>"/>
+                                    <span class="checkmark"><?php echo $row ?></span>
+                                <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <label for="tipo_tipo" style="margin-left: 55px !important">OBSERVACIONES: </label>
-                <textarea type="text" name="observaciones"></textarea>
+                    <label for="tipo_tipo" style="margin-left: 55px !important">OBSERVACIONES: </label>
+                    <textarea type="text" name="observaciones"></textarea>
 
-                <input type="submit" value="Insertar" name="botonInsertar" />
-                <input type="submit" value="Volver" name="botonVolver" />
-            </div>
+                    <input type="hidden" name="anuncios" value="<?php echo $_POST['anuncios'] ?>" />
+                    <input type="submit" value="Insertar" name="botonInsertar" />
+                </div>
+            </form>
         </div>
     </div>
 </body>

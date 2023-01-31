@@ -75,24 +75,35 @@ class ModeloController
     {
         $modelo = new Vivienda();
 
-        if (isset($_POST['botonVolver'])) {
-            header("location: index2.php");
-        }
-        
         if (isset($_POST['botonInsertar'])) {
-            $result = $modelo->insertarVivienda($_POST['tipo'], $_POST['zona'], $_POST['direccion'], $_POST['ndormitorios'], 
-            $_POST['precio'], $_POST['tamano'], $_POST['extras'], $_POST['observaciones'], $_POST['fecha_anuncio']);
-            header("location:index2.php?result=$result");
+            if (isset($_POST['extras'])) {
+                $extras = $_POST['extras'];
+                $extras = implode(",", $extras);
+                $result = $modelo->insertarVivienda(
+                    $_POST['tipo'],
+                    $_POST['zona'],
+                    $_POST['direccion'],
+                    $_POST['ndormitorios'],
+                    $_POST['precio'],
+                    $_POST['tamano'],
+                    $extras,
+                    $_POST['observaciones']
+                );
+                header("location: index2.php?result=$result");
+            } else {
+                echo "<script>alert('Debes marcar al menos una opción en el checkbox')</script>";
+                $tipos_vivienda = $modelo->getEnum('tipo');
+                $zonas_vivienda = $modelo->getEnum('zona');
+                $ndormitorios = $modelo->getEnum('ndormitorios');
+                $extras = $modelo->getEnum('extras');
+                require_once("Vista/Insertar.php");
+            }
+        } else {
+            $tipos_vivienda = $modelo->getEnum('tipo');
+            $zonas_vivienda = $modelo->getEnum('zona');
+            $ndormitorios = $modelo->getEnum('ndormitorios');
+            $extras = $modelo->getEnum('extras');
+            require_once("Vista/Insertar.php");
         }
-
-        if (isset($_GET['result'])) {
-            $result = $_GET['result'];
-        }
-
-        $tipos_vivienda = $modelo->getEnum('tipo');
-        $zonas_vivienda = $modelo->getEnum('zona');
-        $ndormitorios = $modelo->getEnum('ndormitorios');
-        $extras = $modelo->getEnum('extras');
-        require_once("Vista/Insertar.php");
     }
 }
