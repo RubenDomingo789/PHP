@@ -15,9 +15,6 @@
             <h1 style="color: white;">EDITAR VIVIENDA</h1>
             <hr>
             <br>
-            <?php
-            print_r($element3)
-            ?>
             <form method="post" action="index2.php">
                 <label for="tipo_tipo">TIPO DE VIVIENDA: </label>
                 <select type="text" name="tipo" required>

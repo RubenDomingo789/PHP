@@ -41,11 +41,9 @@ class ModeloController
                 header("location: index2.php");
             }
 
-            $tipos = $modelo->getEnum('tipo');
-            $element1 = substr($tipos, 6, 4);
-            $element2 = substr($tipos, 13, 7);
-            $element3 = substr($tipos, 23, 6);
-            $element3 = substr($tipos, 32, 4);
+            $tipos_vivienda = $modelo->getEnum('tipo');
+            $zonas_vivienda = $modelo->getEnum('zona');
+            $ndormitorios = $modelo->getEnum('ndormitorios');
             require_once("Vista/Editar.php");
         } else {
             /************Paginacion****************/
@@ -76,7 +74,25 @@ class ModeloController
     static function publicarAnuncio()
     {
         $modelo = new Vivienda();
-        $tipos_vivienda = $modelo->getEnum('zona');
+
+        if (isset($_POST['botonVolver'])) {
+            header("location: index2.php");
+        }
+        
+        if (isset($_POST['botonInsertar'])) {
+            $result = $modelo->insertarVivienda($_POST['tipo'], $_POST['zona'], $_POST['direccion'], $_POST['ndormitorios'], 
+            $_POST['precio'], $_POST['tamano'], $_POST['extras'], $_POST['observaciones'], $_POST['fecha_anuncio']);
+            header("location:index2.php?result=$result");
+        }
+
+        if (isset($_GET['result'])) {
+            $result = $_GET['result'];
+        }
+
+        $tipos_vivienda = $modelo->getEnum('tipo');
+        $zonas_vivienda = $modelo->getEnum('zona');
+        $ndormitorios = $modelo->getEnum('ndormitorios');
+        $extras = $modelo->getEnum('extras');
         require_once("Vista/Insertar.php");
     }
 }

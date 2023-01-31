@@ -50,32 +50,16 @@ class Vivienda extends Conexion
     {
         try {
             $conn = $this->conexion;
-            $sql = "SELECT column_type FROM information_schema.COLUMNS WHERE column_name = ?";
+            $sql = "SELECT column_type AS 'columna' FROM information_schema.COLUMNS WHERE column_name = ?";
             $query = $conn->prepare($sql);
             $query->bindParam(1, $campo);
             $query->execute();
-            $result = $query->fetch(PDO::FETCH_ASSOC)['COLUMN_TYPE'];
+            $result = $query->fetch(PDO::FETCH_ASSOC)['columna'];
+            $result = str_replace("','", "'", $result);
+            $result = explode("'", $result);
+            array_pop($result);
+            array_shift($result);
             return $result;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-    public function extras()
-    {
-        try {
-            $conn = $this->conexion;
-            $sql = "SELECT column_type FROM information_schema.COLUMNS WHERE column_name = 'extras'";
-            foreach ($conn->query($sql) as $row) {
-                $this->ndormitorios[] = $row[0];
-            }
-            $parentesis = explode("(", $this->ndormitorios[0]);
-            $array = explode(",", $parentesis[1]);
-            $array[4] = substr($array[4], 1, -2);
-            for ($i = 0; $i <= 3; $i++) {
-                $array[$i] = substr($array[$i], 1, -1);
-            }
-            return $array;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
