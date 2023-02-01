@@ -1,6 +1,10 @@
 <html>
 
 <head>
+    <?php
+    if (!isset($_SESSION['usuario'])) {
+        header('location: ../index.php');
+    } ?>
     <title>Ejercicio 1</title>
     <style>
         ul.pagination {
@@ -35,7 +39,6 @@
         ul.pagination li a:hover:not(.active) {
             background-color: #d147ed;
         }
-
     </style>
 </head>
 
@@ -43,27 +46,26 @@
     <ul class="pagination">
         <li>
             <a href="<?php if ($nPaginas <= 1) {
-                            echo 'index2.php';
+                            echo 'index.php';
                         } else {
-                            echo "index2.php?nPaginas=" . ($nPaginas - 1);
+                            echo "index.php?nPaginas=" . ($nPaginas - 1);
                         } ?>">Anterior
             </a>
         </li>
         <?php for ($i = 1; $i <= $paginas; $i++) { ?>
             <li>
-                <a href="index2.php<?php echo "?nPaginas=" . $i; ?>">
+                <a href="index.php<?php echo "?nPaginas=" . $i; ?>">
                     <?php echo $i ?>
                 </a>
             </li>
         <?php } ?>
         <li>
             <a href="<?php if ($nPaginas >= $paginas) {
-                            echo "index2.php";
+                            echo "index.php";
                         } else {
-                            echo "index2.php?nPaginas=" . ($nPaginas + 1);
+                            echo "index.php?nPaginas=" . ($nPaginas + 1);
                         } ?>">Siguiente
             </a>
         </li>
     </ul>
 </body>
-

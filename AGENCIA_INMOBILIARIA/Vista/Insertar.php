@@ -4,6 +4,9 @@
 <head>
     <title>Anuncio</title>
     <?php
+    if (!isset($_SESSION['usuario'])) {
+        header('location: ../index.php');
+    }
     include_once('Menu.php');
     ?>
     <style>
@@ -162,7 +165,7 @@
         <div id="contenido">
             <h1 style="color: white;">NUEVO ANUNCIO</h1>
             <hr>
-            <form method="post" action="index2.php">
+            <form method="post" action="index.php">
                 <div id="campos">
                     <div id="flex">
                         <label for="tipo_tipo">TIPO DE VIVIENDA: </label>

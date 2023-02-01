@@ -1,49 +1,33 @@
 <?php
-require_once('Modelo/Usuario.php');
 require_once('Modelo/Vivienda.php');
 require_once('Modelo/Paginacion.php');
 
-class ModeloController
+class ViviendaController
 {
-    static function index()
-    {
-        $usuario = new Usuario();
-        if (isset($_POST['botonEnviar'])) {
-            $resultado = $usuario->comprobarUser($_POST['usuario'], $_POST['password']);
-            if ($resultado != '') {
-                header("Location:Login.php?msg=$resultado");
-            } else {
-                session_start();
-                $_SESSION['usuario'] = $_POST['usuario'];
-                require_once("index2.php");
-            }
-        }
-    }
-
     static function viviendas()
     {
-        $modelo = new Vivienda();
+        $vivienda = new Vivienda();
         /************Botones****************/
         /*Borrar*/
         if (isset($_POST['borrar'])) {
             $id = $_POST['id'];
-            $result = $modelo->borrarVivienda($id);
+            $result = $vivienda->borrarVivienda($id);
         }
 
         /*Editar*/
         if (isset($_POST['editar'])) {
             if (isset($_POST['botonEditar'])) {
-                $result = $modelo->editarVivienda($_POST['id'], $_POST['tipo'], $_POST['zona'], $_POST['ndormitorios'], $_POST['precio'], $_POST['tamano']);
-                header("location:index2.php?result=$result");
+                $result = $vivienda->editarVivienda($_POST['id'], $_POST['tipo'], $_POST['zona'], $_POST['ndormitorios'], $_POST['precio'], $_POST['tamano']);
+                header("location:index.php?result=$result");
             }
 
             if (isset($_POST['botonVolver'])) {
-                header("location: index2.php");
+                header("location: index.php");
             }
 
-            $tipos_vivienda = $modelo->getEnum('tipo');
-            $zonas_vivienda = $modelo->getEnum('zona');
-            $ndormitorios = $modelo->getEnum('ndormitorios');
+            $tipos_vivienda = $vivienda->getEnum('tipo');
+            $zonas_vivienda = $vivienda->getEnum('zona');
+            $ndormitorios = $vivienda->getEnum('ndormitorios');
             require_once("Vista/Editar.php");
         } else {
             /************Paginacion****************/
@@ -61,10 +45,10 @@ class ModeloController
             $inicio = $paginacion->inicio();
 
             /*Mostrar viviendas y fotos*/
-            $lista_viviendas = $modelo->mostrarViviendas($inicio, $fin);
+            $lista_viviendas = $vivienda->mostrarViviendas($inicio, $fin);
             $fotos = [];
             foreach ($lista_viviendas as $row) {
-                $foto = $modelo->mostrarFotos($row['id']);
+                $foto = $vivienda->mostrarFotos($row['id']);
                 array_push($fotos, $foto);
             }
             require_once("Vista/Principal.php");
@@ -73,13 +57,13 @@ class ModeloController
 
     static function publicarAnuncio()
     {
-        $modelo = new Vivienda();
+        $vivienda = new Vivienda();
 
         if (isset($_POST['botonInsertar'])) {
             if (isset($_POST['extras'])) {
                 $extras = $_POST['extras'];
                 $extras = implode(",", $extras);
-                $result = $modelo->insertarVivienda(
+                $result = $vivienda->insertarVivienda(
                     $_POST['tipo'],
                     $_POST['zona'],
                     $_POST['direccion'],
@@ -89,20 +73,20 @@ class ModeloController
                     $extras,
                     $_POST['observaciones']
                 );
-                header("location: index2.php?result=$result");
+                header("location: index.php?result=$result");
             } else {
                 echo "<script>alert('Debes marcar al menos una opción en el checkbox')</script>";
-                $tipos_vivienda = $modelo->getEnum('tipo');
-                $zonas_vivienda = $modelo->getEnum('zona');
-                $ndormitorios = $modelo->getEnum('ndormitorios');
-                $extras = $modelo->getEnum('extras');
+                $tipos_vivienda = $vivienda->getEnum('tipo');
+                $zonas_vivienda = $vivienda->getEnum('zona');
+                $ndormitorios = $vivienda->getEnum('ndormitorios');
+                $extras = $vivienda->getEnum('extras');
                 require_once("Vista/Insertar.php");
             }
         } else {
-            $tipos_vivienda = $modelo->getEnum('tipo');
-            $zonas_vivienda = $modelo->getEnum('zona');
-            $ndormitorios = $modelo->getEnum('ndormitorios');
-            $extras = $modelo->getEnum('extras');
+            $tipos_vivienda = $vivienda->getEnum('tipo');
+            $zonas_vivienda = $vivienda->getEnum('zona');
+            $ndormitorios = $vivienda->getEnum('ndormitorios');
+            $extras = $vivienda->getEnum('extras');
             require_once("Vista/Insertar.php");
         }
     }

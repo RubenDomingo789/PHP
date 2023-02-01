@@ -15,10 +15,7 @@ class Usuario extends Conexion
     {
         try {
             $conn = $this->conexion;
-            $sql = "SELECT viviendas.*, COUNT(fotos.foto) AS 'nfotos'  FROM inmobiliaria.viviendas 
-            LEFT JOIN fotos ON fotos.id_vivienda = viviendas.id
-            GROUP BY viviendas.id
-            ORDER BY fecha_anuncio DESC LIMIT $inicio, $fin";
+            $sql = "SELECT * FROM usuarios";
             foreach ($conn->query($sql) as $row) {
                 $this->usuarios[] = $row;
             }
@@ -26,6 +23,16 @@ class Usuario extends Conexion
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+    }
+
+    public function borrarUsuario($id)
+    {
+        $conn = $this->conexion;
+        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $query = $conn->prepare($sql);
+        $query->bindParam(1, $id);
+        $query->execute();
+        return 'El usuario ha sido borrado correctamente';
     }
 
     public function comprobarUser($id, $pass)

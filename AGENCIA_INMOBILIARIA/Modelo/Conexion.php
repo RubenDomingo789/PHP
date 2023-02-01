@@ -1,9 +1,10 @@
 <?php
+
 class Conexion
 {
     private $servidor = "localhost";
     private $usuario = "root";
-    private $clave = "root";
+    private $clave = "";
     private $dbname = "inmobiliaria";
 
     function __construct()

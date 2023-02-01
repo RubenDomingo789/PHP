@@ -3,6 +3,9 @@
 <head>
     <title>Viviendas</title>
     <?php
+    if (!isset($_SESSION['usuario'])) {
+        header('location: ../index.php');
+    } 
     include('Menu.php');
     include_once('Estilos/Styles.php');
     ?>
@@ -75,7 +78,7 @@
                 <?php
                 } ?>
                 <td>
-                    <form method="post" action="index2.php">
+                    <form method="post" action="index.php">
                         <button class="edit" name="editar"><i class='fas fa-edit' style='font-size:24px'></i></button>
                         <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
                         <input type="hidden" name="tipo" value="<?php echo $row['tipo'] ?>" />
@@ -86,7 +89,7 @@
                     </form>
                 </td>
                 <td>
-                    <form method="post" action="index2.php">
+                    <form method="post" action="index.php">
                         <button class="trash" name="borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
                         <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
                     </form>

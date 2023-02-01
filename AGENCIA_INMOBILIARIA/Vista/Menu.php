@@ -4,9 +4,8 @@
 <head>
     <?php
     if (!isset($_SESSION['usuario'])) {
-        session_start();
-    }
-    ?>
+        header('location: ../index.php');
+    } ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -70,20 +69,31 @@
 <body>
     <div class="topnav" id="myTopnav">
         <div class="dropdown">
-            <form method='post' action='index2.php'>
+            <form method='post' action='index.php'>
                 <button name="viviendas">Viviendas</button>
             </form>
         </div>
         <div class="dropdown">
-            <form method='post' action='index2.php'>
+            <form method='post' action='index.php'>
                 <button name="anuncios">Publicar Anuncio</button>
             </form>
         </div>
         <div class="dropdown">
-            <form method='post' action='index2.php'>
+            <form method='post' action='index.php'>
                 <button name="buscar">Buscar Viviendas</button>
             </form>
         </div>
+        <?php
+        if ($_SESSION['usuario'] == 'admin') {
+        ?>
+            <div class="dropdown">
+                <form method='post' action='index.php'>
+                    <button name="users">Usuarios</button>
+                </form>
+            </div>
+        <?php
+        }
+        ?>
         <p>
             <?php
             $user = $_SESSION['usuario'];
