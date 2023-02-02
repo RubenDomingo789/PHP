@@ -37,7 +37,7 @@ class Usuario extends Conexion
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             $stmnt->bindParam(2, $password_hash);
 
-            if ($stmnt->execute()){
+            if ($stmnt->execute()) {
                 $msg = 'El usuario ha sido insertado correctamente';
                 return array($msg, $password);
             }
@@ -49,7 +49,7 @@ class Usuario extends Conexion
     public function borrarUsuario($id)
     {
         $conn = $this->conexion;
-        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $sql = "DELETE FROM usuarios WHERE id_usuario = ?";
         $query = $conn->prepare($sql);
         $query->bindParam(1, $id);
         $query->execute();
@@ -60,7 +60,7 @@ class Usuario extends Conexion
     {
         try {
             $conn = $this->conexion;
-            $sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+            $sql = "SELECT id_usuario FROM usuarios WHERE id_usuario = ?";
             $query = $conn->prepare($sql);
             $query->bindParam(1, $id);
             $query->execute();
@@ -70,21 +70,18 @@ class Usuario extends Conexion
                 $msg = "ID de usuario incorrecto";
                 return $msg;
             } else {
-                $sql2 = "SELECT * FROM usuarios WHERE password = ?";
+                $sql2 = "SELECT password FROM usuarios WHERE id_usuario = ?";
                 $query = $conn->prepare($sql2);
-                $query->bindParam(1, $pass);
+                $query->bindParam(1, $id);
                 $query->execute();
                 $result = $query->fetch(PDO::FETCH_ASSOC);
-                $pass_encrypt = $result['password'];
-                $pass_user = password_hash($pass, PASSWORD_DEFAULT);
+                $passBBDD = $result['password'];
 
-                if ($result <= 0) {
+                if (password_verify($pass, $passBBDD)) {
+                    return $msg = '';
+                } else {
                     $msg = "Contraseña incorrecta";
                     return $msg;
-                } else {
-                    if (password_verify($pass_user, $pass_encrypt)) {
-                        return $msg = '';
-                    }
                 }
             }
         } catch (PDOException $e) {

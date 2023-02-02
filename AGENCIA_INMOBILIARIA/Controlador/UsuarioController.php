@@ -23,6 +23,12 @@ class UsuarioController
     {
         $usuario = new Usuario();
         /************Botones****************/
+        /*Borrar*/
+        if (isset($_POST['borrar'])) {
+            $id = $_POST['id'];
+            $result = $usuario->borrarUsuario($id);
+        }
+
         /*Insertar*/
         if (isset($_POST['insertar'])) {
             if (isset($_POST['botonInsertar'])) {
@@ -31,14 +37,10 @@ class UsuarioController
                 );
                 $password = $array[1];
                 $result = $array[0];
+                require_once("Vista/InsertarUsuario.php");
+            } else {
+                require_once("Vista/InsertarUsuario.php");
             }
-            require_once("Vista/InsertarUsuario.php");
-        }
-
-        /*Borrar*/
-        else if (isset($_POST['borrar'])) {
-            $id = $_POST['id'];
-            $result = $usuario->borrarUsuario($id);
         } else {
             /************Paginacion****************/
             if (isset($_GET['result'])) {

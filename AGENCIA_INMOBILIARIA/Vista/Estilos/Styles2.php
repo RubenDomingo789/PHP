@@ -101,7 +101,7 @@
         column-gap: 5px;
         padding: 10px;
         margin-left: 10px !important;
-        column-gap: 10px;
+        column-gap: 6px;
     }
 
     input[type="checkbox"] {
@@ -109,10 +109,22 @@
         height: 28px;
     }
 
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    input[type="radio"] + span {
+        color: white;
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
     .checkmark {
         color: white;
         font-size: 20px;
         margin-top: 5px;
+        column-gap: 5px !important;
     }
 
     select[type="text"],

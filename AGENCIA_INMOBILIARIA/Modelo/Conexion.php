@@ -4,7 +4,7 @@ class Conexion
 {
     private $servidor = "localhost";
     private $usuario = "root";
-    private $clave = "";
+    private $clave = "root";
     private $dbname = "inmobiliaria";
 
     function __construct()

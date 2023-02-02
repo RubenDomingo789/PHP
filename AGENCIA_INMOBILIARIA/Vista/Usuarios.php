@@ -35,6 +35,7 @@
                         <form method="post" action="index.php">
                             <button class="trash" name="borrar" title="Borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
                             <input type="hidden" name="id" value="<?php echo $row['id_usuario'] ?>" />
+                            <input type="hidden" name="users" value="<?php echo $_POST['users'] ?>" />
                         </form>
                     </td>
                 <?php } else { ?>

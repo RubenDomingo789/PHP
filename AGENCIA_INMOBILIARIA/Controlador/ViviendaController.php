@@ -90,4 +90,14 @@ class ViviendaController
             require_once("Vista/Insertar.php");
         }
     }
+
+    static function filtrarViviendas()
+    {
+        $vivienda = new Vivienda();
+        $tipos_vivienda = $vivienda->getEnum('tipo');
+        $zonas_vivienda = $vivienda->getEnum('zona');
+        $ndormitorios = $vivienda->getEnum('ndormitorios');
+        $extras = $vivienda->getEnum('extras');
+        require_once("Vista/Filtrar.php");
+    }
 }
