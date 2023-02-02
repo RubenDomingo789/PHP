@@ -41,6 +41,7 @@
                     <td>
                         <form method="post" action="index.php">
                             <button class="insert" name="insertar" title="Insertar"><i class='fas fa-plus' style='font-size:24px'></i></button>
+                            <input type="hidden" name="users" value="<?php echo $_POST['users'] ?>" />
                         </form>      
                     </td>
                 <?php } ?>

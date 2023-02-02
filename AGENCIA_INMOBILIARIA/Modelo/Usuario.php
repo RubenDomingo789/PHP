@@ -25,6 +25,27 @@ class Usuario extends Conexion
         }
     }
 
+    public function insertarUsuario($id_usuario)
+    {
+        try {
+            $conn = $this->conexion;
+            $sql = "INSERT INTO usuarios (id_usuario, password) VALUES (?, ?)";
+            $stmnt = $conn->prepare($sql);
+            $stmnt->bindParam(1, $id_usuario);
+            $str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            $password = substr(str_shuffle($str), 0, 5);
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            $stmnt->bindParam(2, $password_hash);
+
+            if ($stmnt->execute()){
+                $msg = 'El usuario ha sido insertado correctamente';
+                return array($msg, $password);
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     public function borrarUsuario($id)
     {
         $conn = $this->conexion;
@@ -62,7 +83,7 @@ class Usuario extends Conexion
                     return $msg;
                 } else {
                     if (password_verify($pass_user, $pass_encrypt)) {
-                        return $msg= '';
+                        return $msg = '';
                     }
                 }
             }
