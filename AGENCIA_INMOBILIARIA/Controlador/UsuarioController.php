@@ -23,6 +23,11 @@ class UsuarioController
     {
         $usuario = new Usuario();
         /************Botones****************/
+        /*Insertar*/
+        if (isset($_POST['insert'])) {
+            $id = $_POST['id'];
+            $result = $usuario->borrarUsuario($id);
+        } 
         /*Borrar*/
         if (isset($_POST['borrar'])) {
             $id = $_POST['id'];
@@ -43,7 +48,7 @@ class UsuarioController
             $fin = $paginacion->getProperty('elementos_pagina');
             $inicio = $paginacion->inicio();
 
-            /*Mostrar viviendas y fotos*/
+            /*Mostrar usuarios*/
             $lista_usuarios = $usuario->mostrarUsuarios($inicio, $fin);
             require_once("Vista/Usuarios.php");
         }

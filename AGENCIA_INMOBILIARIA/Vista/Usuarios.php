@@ -33,15 +33,15 @@
                 <?php if ($row['id_usuario'] != 'admin') { ?>
                     <td>
                         <form method="post" action="index.php">
-                            <button class="trash" name="borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
+                            <button class="trash" name="borrar" title="Borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
                             <input type="hidden" name="id" value="<?php echo $row['id_usuario'] ?>" />
                         </form>
                     </td>
                 <?php } else { ?>
                     <td>
                         <form method="post" action="index.php">
-                            <button class="insert" name="insertar"><i class='far fa-plus' style='font-size:24px'></i></button>
-                        </form>
+                            <button class="insert" name="insertar" title="Insertar"><i class='fas fa-plus' style='font-size:24px'></i></button>
+                        </form>      
                     </td>
                 <?php } ?>
             </tr>

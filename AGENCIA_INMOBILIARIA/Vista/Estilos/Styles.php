@@ -137,6 +137,13 @@
         height: 50px;
     }
 
+    button.insert {
+        background-color: #98c41d;
+        border-radius: 5px;
+        width: 50px;
+        height: 50px;
+    }
+
     .alert {
         position: absolute;
         margin-top: 20px;

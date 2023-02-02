@@ -15,7 +15,7 @@ class Usuario extends Conexion
     {
         try {
             $conn = $this->conexion;
-            $sql = "SELECT * FROM usuarios";
+            $sql = "SELECT * FROM usuarios LIMIT $inicio, $fin";
             foreach ($conn->query($sql) as $row) {
                 $this->usuarios[] = $row;
             }
