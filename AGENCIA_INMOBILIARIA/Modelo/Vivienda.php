@@ -115,4 +115,14 @@ class Vivienda extends Conexion
         $query->execute();
         return 'La vivienda ha sido borrada correctamente';
     }
+
+    public function filtrarVivienda($tipo, $zona, $precio, $tamano, $ndormitorios, $extras)
+    {
+        $conn = $this->conexion;
+        $sql = "SELECT * FROM viviendas WHERE tipo = ? AND zona = ?";
+        $query = $conn->prepare($sql);
+        $query->bindParam(1, $id);
+        $query->execute();
+        return 'La vivienda ha sido borrada correctamente';
+    }
 }
