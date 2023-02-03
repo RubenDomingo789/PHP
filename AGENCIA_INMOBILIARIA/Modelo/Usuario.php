@@ -42,7 +42,9 @@ class Usuario extends Conexion
                 return array($msg, $password);
             }
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            $password = '';
+            $msg = 'El usuario ya ha sido dado de alta';
+            return array($msg, $password);
         }
     }
 
@@ -70,18 +72,27 @@ class Usuario extends Conexion
                 $msg = "ID de usuario incorrecto";
                 return $msg;
             } else {
-                $sql2 = "SELECT password FROM usuarios WHERE id_usuario = ?";
+                $sql2 = "SELECT * FROM usuarios WHERE id_usuario = ?";
                 $query = $conn->prepare($sql2);
                 $query->bindParam(1, $id);
                 $query->execute();
                 $result = $query->fetch(PDO::FETCH_ASSOC);
                 $passBBDD = $result['password'];
 
-                if (password_verify($pass, $passBBDD)) {
-                    return $msg = '';
+                if ($result['id_usuario'] == 'admin') {
+                    if ($passBBDD == $pass) {
+                        return $msg = '';
+                    } else {
+                        $msg = "Contraseña incorrecta";
+                        return $msg;
+                    }
                 } else {
-                    $msg = "Contraseña incorrecta";
-                    return $msg;
+                    if (password_verify($pass, $passBBDD)) {
+                        return $msg = '';
+                    } else {
+                        $msg = "Contraseña incorrecta";
+                        return $msg;
+                    }
                 }
             }
         } catch (PDOException $e) {
