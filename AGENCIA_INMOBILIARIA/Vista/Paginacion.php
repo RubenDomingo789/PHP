@@ -70,7 +70,7 @@
             <?php } ?>
             <li>
                 <form method="post" action="<?php if ($nPaginas >= $paginas) {
-                                                echo "index.php?nPaginas=" . ($nPaginas ++);
+                                                echo "index.php?nPaginas=" . ($nPaginas++);
                                             } else {
                                                 echo 'index.php?nPaginas=' . $paginas;
                                             } ?>">
@@ -106,7 +106,7 @@
             <?php } ?>
             <li>
                 <form method="post" action="<?php if ($nPaginas >= $paginas) {
-                                                echo "index.php?nPaginas=" . ($nPaginas ++);
+                                                echo "index.php?nPaginas=" . ($nPaginas++);
                                             } else {
                                                 echo 'index.php?nPaginas=' . $paginas;
                                             } ?>">

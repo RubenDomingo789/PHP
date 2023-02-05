@@ -114,7 +114,7 @@
         height: 20px;
     }
 
-    input[type="radio"] + span {
+    input[type="radio"]+span {
         color: white;
         font-size: 20px;
         margin-right: 10px;
@@ -155,6 +155,18 @@
         font-size: 20px;
         margin-top: 24px;
         margin-left: 30px;
+        float: left;
+        clear: both;
+    }
+
+    input[type="file"] {
+        padding: 10px;
+        background-color: #f2f2f2;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 5px;
+        margin-left: 11px;
         float: left;
         clear: both;
     }

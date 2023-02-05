@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION['usuario'])) {
+    header('location: ../index.php');
+}
 require_once('Modelo/Vivienda.php');
 require_once('Modelo/Paginacion.php');
 
@@ -73,6 +76,9 @@ class ViviendaController
                     $extras,
                     $_POST['observaciones']
                 );
+                $id = $vivienda->ultimoId()[0][0];
+                //move_uploaded_file($_FILES['file']['tmp_name'], 'C:/xampp/htdocs/PHP/AGENCIA_INMOBILIARIA/Vista/fotos/'. $_FILES['file']['name']);
+                $vivienda->insertarFoto($id, $_POST['foto']);
                 header("location: index.php?result=$result");
             } else {
                 echo "<script>alert('Debes marcar al menos una opción en el checkbox')</script>";
@@ -94,10 +100,43 @@ class ViviendaController
     static function filtrarViviendas()
     {
         $vivienda = new Vivienda();
-        $tipos_vivienda = $vivienda->getEnum('tipo');
-        $zonas_vivienda = $vivienda->getEnum('zona');
-        $ndormitorios = $vivienda->getEnum('ndormitorios');
-        $extras = $vivienda->getEnum('extras');
-        require_once("Vista/Filtrar.php");
+
+        if (isset($_POST['botonBuscar'])) {
+            if (isset($_POST['extras'])) {
+                $extras = implode(",", $_POST['extras']);
+            } else {
+                $extras = '';
+            }
+
+            if (!isset($_POST['ndormitorios'])) {
+                $ndormitorios = '';
+            } else {
+                $ndormitorios = $_POST['ndormitorios'];
+            }
+            $fotos = [];
+
+            $viviendas_filtradas = $vivienda->filtrarVivienda($_POST['tipo'], $_POST['zona'], $_POST['precio'], $_POST['tamano'], $ndormitorios, $extras);
+
+            if (is_string($viviendas_filtradas)) {
+                $result = $viviendas_filtradas;
+                $tipos_vivienda = $vivienda->getEnum('tipo');
+                $zonas_vivienda = $vivienda->getEnum('zona');
+                $ndormitorios = $vivienda->getEnum('ndormitorios');
+                $extras = $vivienda->getEnum('extras');
+                require_once("Vista/Filtrar.php");
+            } else {
+                foreach ($viviendas_filtradas as $row) {
+                    $foto = $vivienda->mostrarFotos($row['id']);
+                    array_push($fotos, $foto);
+                }
+                require_once("Vista/TablaFiltrar.php");
+            }
+        } else {
+            $tipos_vivienda = $vivienda->getEnum('tipo');
+            $zonas_vivienda = $vivienda->getEnum('zona');
+            $ndormitorios = $vivienda->getEnum('ndormitorios');
+            $extras = $vivienda->getEnum('extras');
+            require_once("Vista/Filtrar.php");
+        }
     }
 }

@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION['usuario'])) {
+    header('location: ../index.php');
+} 
 require_once('Conexion.php');
 class Vivienda extends Conexion
 {
@@ -7,6 +10,7 @@ class Vivienda extends Conexion
     private $tipos;
     private $zonas;
     private $ndormitorios;
+    private $ids;
 
     public function __construct()
     {
@@ -106,23 +110,101 @@ class Vivienda extends Conexion
         }
     }
 
+    public function ultimoId(){
+        try {
+            $conn = $this->conexion;
+            $sql = "SELECT MAX(id) FROM viviendas";
+            foreach ($conn->query($sql) as $row) {
+                $this->ids[] = $row;
+            }
+            return $this->ids;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function insertarFoto($idVivienda, $ruta){
+        try {
+            $conn = $this->conexion;
+            $sql = "INSERT INTO fotos (id_vivienda, foto) VALUES ( ?, ?)";
+            $stmnt = $conn->prepare($sql);
+            $stmnt->bindParam(1, $idVivienda);
+            $stmnt->bindParam(2, $ruta);
+            $stmnt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     public function borrarVivienda($id)
     {
-        $conn = $this->conexion;
-        $sql = "DELETE FROM viviendas WHERE id = ?";
-        $query = $conn->prepare($sql);
-        $query->bindParam(1, $id);
-        $query->execute();
-        return 'La vivienda ha sido borrada correctamente';
+        try {
+            $conn = $this->conexion;
+            $sql = "DELETE FROM viviendas WHERE id = ?";
+            $query = $conn->prepare($sql);
+            $query->bindParam(1, $id);
+            $query->execute();
+            return 'La vivienda ha sido borrada correctamente';
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     public function filtrarVivienda($tipo, $zona, $precio, $tamano, $ndormitorios, $extras)
     {
         $conn = $this->conexion;
-        $sql = "SELECT * FROM viviendas WHERE tipo = ? AND zona = ?";
+        $sql = "SELECT viviendas.*, COUNT(fotos.foto) AS 'nfotos'  FROM inmobiliaria.viviendas 
+        LEFT JOIN fotos ON fotos.id_vivienda = viviendas.id WHERE ";
+
+        if ($tipo != "") {
+            $sql .= "tipo = :tipo AND ";
+        }
+
+        if ($zona != "") {
+            $sql .= "zona = :zona AND ";
+        }
+
+        if ($precio != '') {
+            $sql .= "precio $precio AND ";
+        }
+
+        if ($tamano != '') {
+            $sql .= "tamano $tamano AND ";
+        }
+
+        if ($ndormitorios != '') {
+            $sql .= "ndormitorios = :ndormitorios AND ";
+        }
+
+        if ($extras != '') {
+            $sql .= "extras = :extras AND ";
+        }
+
+        $sql .= "true = true GROUP BY viviendas.id";
         $query = $conn->prepare($sql);
-        $query->bindParam(1, $id);
+
+        if ($tipo != '') {
+            $query->bindValue(":tipo", $tipo);
+        }
+
+        if ($zona != '') {
+            $query->bindValue(":zona", $zona);
+        }
+
+        if ($ndormitorios != '') {
+            $query->bindValue(":ndormitorios", strval($ndormitorios));
+        }
+
+        if ($extras != '') {
+            $query->bindValue(":extras", $extras);
+        }
+
         $query->execute();
-        return 'La vivienda ha sido borrada correctamente';
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($result)) {
+            return 'No se ha encontrado ninguna vivienda para los filtros seleccionados';
+        } else {
+            return $result;
+        }
     }
 }

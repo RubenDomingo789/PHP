@@ -54,12 +54,14 @@
                             ?>
                         </select>
 
+                        <label for="tipo_tipo">FOTO: </label>
+                        <input type="file" name="foto" accept="image/*"/>
                     </div>
                     <div id="flex2">
-                        <label for="tipo_tipo">PRECIO: </label>
+                        <label for="tipo_tipo">PRECIO (€): </label>
                         <input type="number" min="1" name="precio" required />
 
-                        <label for="tipo_tipo">TAMAÑO: </label>
+                        <label for="tipo_tipo">TAMAÑO (m<sup>2</sup>): </label>
                         <input type="number" min="1" name="tamano" required />
 
                         <label for="tipo_tipo">FECHA DE ANUNCIO: </label>

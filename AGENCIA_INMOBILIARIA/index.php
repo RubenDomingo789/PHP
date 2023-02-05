@@ -14,7 +14,7 @@ else {
         require_once('Controlador/ViviendaController.php');
         ViviendaController::publicarAnuncio();
     }
-    else if (isset($_POST['buscar'])){
+    else if (isset($_POST['buscar']) || isset($_GET['buscar'])){
         require_once('Controlador/ViviendaController.php');
         ViviendaController::filtrarViviendas();
     }

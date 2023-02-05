@@ -67,9 +67,9 @@
                     endforeach;
                     ?>
                 </select>
-                <label for="tipo_tipo"> PRECIO: </label>
+                <label for="tipo_tipo"> PRECIO (€): </label>
                 <input type="number" min="1" placeholder="Precio" name="precio" value="<?= $_POST['precio'] ?>" required/>
-                <label for="tipo_tipo"> TAMAÑO: </label>
+                <label for="tipo_tipo"> TAMAÑO (m<sup>2</sup>): </label>
                 <input type="number" min="1" placeholder="Tamaño" name="tamano" value="<?= $_POST['tamano'] ?>" required/>
                 <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>" />
                 <input type="hidden" name="editar" value="<?php echo $_POST['editar'] ?>" />

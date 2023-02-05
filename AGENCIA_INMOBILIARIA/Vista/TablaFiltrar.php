@@ -1,26 +1,27 @@
 <html>
 
 <head>
-    <title>Viviendas</title>
     <?php
     if (!isset($_SESSION['usuario'])) {
         header('location: ../index.php');
-    } 
+    }
     include('Menu.php');
     include_once('Estilos/Styles.php');
     ?>
 </head>
-<script>
-    <?php if ($result != "") {
-    ?>alert("<?= $result ?>")
-    <?php
-    } ?>
-</script>
 
 <body>
     <br>
     <br>
     <table>
+        <tr>
+            <th colspan="6" style="font-size: 28px; border:none; padding-bottom: 0px;">VIVIENDAS FILTRADAS: </th>
+        </tr>
+        <tr>
+            <th colspan="6" style="font-size: 24px; border:none; padding-bottom: 5px; padding-top: 5px">
+                <hr>
+            </th>
+        </tr>
         <tr>
             <th>TIPO VIVIENDA</th>
             <th>ZONA</th>
@@ -28,12 +29,11 @@
             <th>TAMAÑO</th>
             <th>PRECIO</th>
             <th>FOTOS</th>
-            <th colspan="2">ACCIONES</th>
         </tr>
         <?php
         $contArray = 0;
         $contArray2 = 0;
-        foreach ($lista_viviendas as $row) {
+        foreach ($viviendas_filtradas as $row) {
         ?>
             <tr>
                 <td><?php echo $row['tipo'] ?></td>
@@ -41,6 +41,7 @@
                 <td><?php echo $row['ndormitorios'] ?></td>
                 <td><?php echo $row['tamano'] ?> m<sup>2</sup></td>
                 <td><?php echo $row['precio'] ?> €</td>
+
                 <?php
                 if ($row['nfotos'] > 1) {
                 ?>
@@ -77,32 +78,16 @@
                     <td></td>
                 <?php
                 } ?>
-                <td>
-                    <form method="post" action="index.php">
-                        <button class="edit" name="editar" title="Editar"><i class='fas fa-edit' style='font-size:24px'></i></button>
-                        <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
-                        <input type="hidden" name="tipo" value="<?php echo $row['tipo'] ?>" />
-                        <input type="hidden" name="zona" value="<?php echo $row['zona'] ?>" />
-                        <input type="hidden" name="ndormitorios" value="<?php echo $row['ndormitorios'] ?>" />
-                        <input type="hidden" name="tamano" value="<?php echo $row['tamano'] ?>" />
-                        <input type="hidden" name="precio" value="<?php echo $row['precio'] ?>" />
-                    </form>
-                </td>
-                <td>
-                    <form method="post" action="index.php">
-                        <button class="trash" name="borrar" title="Borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
-                        <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
-                    </form>
-                </td>
             </tr>
         <?php
         }
         ?>
     </table>
     <br>
-    <?php
-    include('Paginacion.php');
-    ?>
+    <form method="post" action="index.php">
+        <input type="hidden" name="buscar" value="<?php echo $_POST['buscar']; ?>">
+        <input type="submit" value="Volver" name="botonVolver" style="position: relative; left: 39.5%; margin-bottom: 20px"/>
+    </form>
 </body>
 
 </html>
