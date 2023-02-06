@@ -90,6 +90,9 @@ class ViviendaController
                     header("location: index.php?result=$result");
                 }
             }
+            else {
+                header("location: index.php?result=$result");
+            }
         } else {
             $tipos_vivienda = $vivienda->getEnum('tipo');
             $zonas_vivienda = $vivienda->getEnum('zona');
