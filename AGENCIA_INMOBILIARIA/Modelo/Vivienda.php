@@ -1,15 +1,9 @@
 <?php
-if (!isset($_SESSION['usuario'])) {
-    header('location: ../index.php');
-} 
 require_once('Conexion.php');
 class Vivienda extends Conexion
 {
     private $conexion;
     private $viviendas;
-    private $tipos;
-    private $zonas;
-    private $ndormitorios;
     private $ids;
 
     public function __construct()

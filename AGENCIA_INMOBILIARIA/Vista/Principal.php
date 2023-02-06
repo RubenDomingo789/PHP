@@ -5,7 +5,7 @@
     <?php
     if (!isset($_SESSION['usuario'])) {
         header('location: ../index.php');
-    } 
+    }
     include('Menu.php');
     include_once('Estilos/Styles.php');
     ?>
@@ -22,6 +22,7 @@
     <br>
     <table>
         <tr>
+            <th>ID</th>
             <th>TIPO VIVIENDA</th>
             <th>ZONA</th>
             <th>Nº DORMITORIOS</th>
@@ -36,6 +37,7 @@
         foreach ($lista_viviendas as $row) {
         ?>
             <tr>
+                <td><?php echo $row['id'] ?></td>
                 <td><?php echo $row['tipo'] ?></td>
                 <td><?php echo $row['zona'] ?></td>
                 <td><?php echo $row['ndormitorios'] ?></td>

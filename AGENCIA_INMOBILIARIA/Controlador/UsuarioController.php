@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once('Modelo/Usuario.php');
 require_once('Modelo/Paginacion.php');
 

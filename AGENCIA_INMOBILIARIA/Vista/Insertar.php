@@ -17,7 +17,7 @@
         <div id="contenido">
             <h1 style="color: white;">NUEVO ANUNCIO</h1>
             <hr>
-            <form method="post" action="index.php">
+            <form method="post" action="index.php" enctype="multipart/form-data">
                 <div id="campos">
                     <div id="flex">
                         <label for="tipo_tipo">TIPO DE VIVIENDA: </label>

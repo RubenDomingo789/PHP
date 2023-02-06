@@ -66,27 +66,29 @@ class ViviendaController
             if (isset($_POST['extras'])) {
                 $extras = $_POST['extras'];
                 $extras = implode(",", $extras);
-                $result = $vivienda->insertarVivienda(
-                    $_POST['tipo'],
-                    $_POST['zona'],
-                    $_POST['direccion'],
-                    $_POST['ndormitorios'],
-                    $_POST['precio'],
-                    $_POST['tamano'],
-                    $extras,
-                    $_POST['observaciones']
-                );
-                $id = $vivienda->ultimoId()[0][0];
-                //move_uploaded_file($_FILES['file']['tmp_name'], 'C:/xampp/htdocs/PHP/AGENCIA_INMOBILIARIA/Vista/fotos/'. $_FILES['file']['name']);
-                $vivienda->insertarFoto($id, $_POST['foto']);
-                header("location: index.php?result=$result");
             } else {
-                echo "<script>alert('Debes marcar al menos una opción en el checkbox')</script>";
-                $tipos_vivienda = $vivienda->getEnum('tipo');
-                $zonas_vivienda = $vivienda->getEnum('zona');
-                $ndormitorios = $vivienda->getEnum('ndormitorios');
-                $extras = $vivienda->getEnum('extras');
-                require_once("Vista/Insertar.php");
+                $extras = '';
+            }
+            $result = $vivienda->insertarVivienda(
+                $_POST['tipo'],
+                $_POST['zona'],
+                $_POST['direccion'],
+                $_POST['ndormitorios'],
+                $_POST['precio'],
+                $_POST['tamano'],
+                $extras,
+                $_POST['observaciones']
+            );
+
+            $name = $_FILES['foto']['name'];
+            $temp = $_FILES['foto']['tmp_name'];
+
+            if ($name != null) {
+                $id = $vivienda->ultimoId()[0][0];
+                $vivienda->insertarFoto($id, $name);
+                if (move_uploaded_file($temp, 'Vista/fotos/' . $name)) {
+                    header("location: index.php?result=$result");
+                }
             }
         } else {
             $tipos_vivienda = $vivienda->getEnum('tipo');
