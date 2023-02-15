@@ -5,7 +5,7 @@ class Conexion
     //Conexión a la BBDD
     private $servidor = "localhost";
     private $usuario = "root";
-    private $clave = "root";
+    private $clave = "";
     private $dbname = "restaurante";
 
     function __construct()

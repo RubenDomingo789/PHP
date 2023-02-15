@@ -13,6 +13,22 @@ class daoPlato extends Conexion implements PlatoDAO
         $this->conn = Conexion::conectar();
     }
 
+    public function findByNombre($nombre)
+    {
+        try {
+            for ($i = 0; $i < count($nombre); $i++) {
+                $sql = "SELECT * FROM platos WHERE nombre = ?";
+                $stmnt = $this->conn->prepare($sql);
+                $stmnt->bindParam(1, $nombre[$i]);
+                $stmnt->execute();
+                $platos[] = $stmnt->fetch(PDO::FETCH_ASSOC);
+            }
+            return $platos;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     public function mostrar()
     {
         try {

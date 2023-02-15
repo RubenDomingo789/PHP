@@ -9,7 +9,11 @@ if (!isset($_SESSION['usuario'])) {
     }
     require_once 'Vista/Login.php';
 } else {
-    if (isset($_POST['salir'])) {
+    if (isset($_POST['boton'])){
+        require_once 'Controlador/PlatoController.php';
+        PlatoController::carrito();
+    }
+    else if (isset($_POST['salir'])) {
         session_destroy();
         require_once('Vista/Login.php');
     } else {

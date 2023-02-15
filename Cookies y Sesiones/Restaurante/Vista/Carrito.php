@@ -91,41 +91,35 @@
         column-gap: 50px;
     }
 </style>
-<?php
-
-?>
 
 <body>
-    <div id='contenedor'>
-        <div>
-            <h2>RESTAURANTE</h2>
-            <form method='post' action='index.php'>
-                <button name="salir"><i class="fa fa-power-off"></i></button>
-            </form>
-            <hr>
-            <br>
-            <table>
-                <form method="post" action="">
-                    <?php
-                    foreach ($lista_platos as $platos => $valor) {
-                    ?>
-                        <tr>
-                            <td><input type='checkbox' name=carrito[] value='<?php echo $valor['nombre'] ?>'><?php echo $valor['nombre'] ?></input></td>
-                            <td><?php echo $valor['categoria'] ?></td>
-                            <td><?php echo $valor['precio'] ?>€</td>
-                        </tr>
-                    <?php } ?>
-                    <tr>
-                        <td><input type="submit" name="boton" value="Enviar" /></td>
-                    </tr>
-                </form>
-            </table>
-        </div>
-        <?php
-        if (isset($_SESSION['carrito'])) {
-            include "Carrito.php";
-        }
-        ?>
+    <div>
+        <h2>CARRITO</h2>
+        <hr>
+        <br>
+        <table>
+            <?php
+            echo "<pre>";
+            print_r($_SESSION['carrito']);
+            echo "</pre>";
+
+            foreach ($_SESSION['carrito'] as $key => $value) {
+            ?>
+                <tr>
+                    <td><?php echo $value['nombre'] ?></td>
+                    <td><?php echo $value['precio'] ?></td>
+                    <td>
+                        <form method="post" action="">
+                            <button class="trash" name="borrar" title="Borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
+
+                        </form>
+                    </td>
+
+                </tr>
+            <?php } ?>
+        </table>
+        <hr>
+    </div>
 </body>
 
 </html>

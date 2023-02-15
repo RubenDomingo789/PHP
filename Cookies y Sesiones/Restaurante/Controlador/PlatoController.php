@@ -13,4 +13,20 @@ class PlatoController
         $lista_platos = $dao->mostrar();
         require_once("Vista/Carta.php");
     }
+
+    static function carrito()
+    {
+        $dao = new daoPlato();
+        $nombres = $_POST['carrito'];
+        $lista_platos = $dao->mostrar();
+        if (!isset($_SESSION['carrito'])){
+            $products = $dao->findBynombre($nombres);
+            array_push($_SESSION['carrito'], $products);
+        }
+        else {
+            $products = $dao->findBynombre($nombres);
+            array_push($_SESSION['carrito'], $products);
+        }
+        require_once("Vista/Carta.php");
+    }
 }
