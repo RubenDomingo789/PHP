@@ -99,26 +99,33 @@
         <br>
         <table>
             <?php
-            echo "<pre>";
-            print_r($_SESSION['carrito']);
-            echo "</pre>";
+            print_r($products);
+            $cont = 1;
+            $precio = 0;
 
             foreach ($_SESSION['carrito'] as $key => $value) {
             ?>
                 <tr>
+                    <?php if (isset($_COOKIE[$value['id']])) { ?>
+                        <td><?php echo $_COOKIE[$value['id']] ?></td>
+                    <?php $precio += $value['precio'] * $_COOKIE[$value['id']];
+                    } ?>
                     <td><?php echo $value['nombre'] ?></td>
                     <td><?php echo $value['precio'] ?></td>
                     <td>
                         <form method="post" action="">
                             <button class="trash" name="borrar" title="Borrar"><i class='far fa-trash-alt' style='font-size:24px'></i></button>
-
+                            <input type="hidden" name="id" value="<?php echo $value['id']; ?>" />
                         </form>
                     </td>
-
                 </tr>
-            <?php } ?>
+            <?php
+            } ?>
         </table>
         <hr>
+        <?php if (isset($_COOKIE[$value['id']])) { ?>
+            <p>Precio final: <?php echo $precio ?></p>
+        <?php } ?>
     </div>
 </body>
 
