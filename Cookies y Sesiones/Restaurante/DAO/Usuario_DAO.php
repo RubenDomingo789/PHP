@@ -1,9 +1,9 @@
 <?php
-require_once 'Modelo/Conexion.php';
 require_once 'Modelo/Usuario.php';
 require_once 'UsuarioDAO.php';
+require_once 'DataSource.php';
 
-class daoUsuario extends Conexion implements UsuarioDAO
+class daoUsuario extends Dao implements UsuarioDAO
 {
     private $conn;
 

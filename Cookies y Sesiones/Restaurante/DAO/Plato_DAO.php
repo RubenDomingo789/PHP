@@ -1,16 +1,15 @@
 <?php
-require_once 'Modelo/Conexion.php';
 require_once 'Modelo/Plato.php';
 require_once 'PlatoDAO.php';
+require_once 'DataSource.php';
 
-class daoPlato extends Conexion implements PlatoDAO
+class daoPlato extends Dao implements PlatoDAO
 {
     private $conn;
-    private $platos;
 
     public function __construct()
     {
-        $this->conn = Conexion::conectar();
+        $this->conn = parent::conectar();
     }
 
     public function findByNombre($nombre)
@@ -23,17 +22,6 @@ class daoPlato extends Conexion implements PlatoDAO
                 $stmnt->execute();
                 $platos[] = $stmnt->fetch(PDO::FETCH_ASSOC);
             }
-            return $platos;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-    public function mostrar()
-    {
-        try {
-            $sql = "SELECT * FROM platos";
-            $platos = $this->conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             return $platos;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();

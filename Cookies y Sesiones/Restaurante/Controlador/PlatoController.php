@@ -4,19 +4,21 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 require_once 'DAO/Plato_DAO.php';
+require_once 'DAO/DataSource.php';
 
 class PlatoController
 {
     static function platos()
     {
-        $dao = new daoPlato();
-        $lista_platos = $dao->mostrar();
+        $dao = new dao();
+        $lista_platos = $dao->mostrar('platos');
         require_once("Vista/Carta.php");
     }
 
     static function carrito()
     {
-        $dao = new daoPlato();
+        $daoPlato = new daoPlato();
+        $dao = new dao();
 
         if (isset($_POST['borrar'])) {
             foreach ($_SESSION['carrito'] as $key => $value) {
@@ -30,15 +32,14 @@ class PlatoController
                     }                  
                 }
             }
-            $dao = new daoPlato();
-            $lista_platos = $dao->mostrar();
+            $lista_platos = $dao->mostrar('platos');
             require_once("Vista/Carta.php");
         } else {
             $nombres = $_POST['carrito'];
-            $lista_platos = $dao->mostrar();
+            $lista_platos = $dao->mostrar('platos');
 
             if (!isset($_SESSION['carrito'])) {
-                $_SESSION['carrito'] = $dao->findBynombre($nombres);
+                $_SESSION['carrito'] = $daoPlato->findBynombre($nombres);
                 foreach ($_SESSION['carrito'] as $row => $value) {
                     if ($value['id'] == 1) {
                         setcookie(1, 1);
@@ -69,7 +70,7 @@ class PlatoController
                     }
                 }
             } else {
-                $products = $dao->findBynombre($nombres);
+                $products = $daoPlato->findBynombre($nombres);
                 foreach ($products as $key => $value) {
                     if (!isset($_COOKIE[$value['id']])) {
                         if ($value['id'] == 1) {

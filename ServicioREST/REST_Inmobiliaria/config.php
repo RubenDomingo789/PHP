@@ -2,7 +2,7 @@
 $db = [
     'host' => 'localhost',
     'username' => 'root',
-    'password' => '',
+    'password' => 'root',
     'db' => 'inmobiliaria' //Cambiar al nombre de tu base de datos
 ];
 ?>
