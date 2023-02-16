@@ -20,20 +20,27 @@
 
 </html>
 <?php
+$options = array(
+    'uri' => 'http://localhost/PHP/ServicioSOAP',
+    'location' => 'http://localhost/PHP/ServicioSOAP/Inmobiliaria/SoapService.php'
+);
 if (isset($_POST['botonEnviar'])) {
-    $options = array(
-        'uri' => 'http://localhost/PHP/ServicioSOAP',
-        'location' => 'http://localhost/PHP/ServicioSOAP/Inmobiliaria/SoapService.php'
-    );
-
     try {
         $zona = new SoapClient(null, $options);
-        $response = $zona->filtrarzonas($_POST['zona']);
-        if ($response != null) {
-            echo 'No hay ninguna zona';
-        } else {
-            echo 'El animal no esta adoptado';
+        $tabla = $zona->filtrarZonas($_POST['zona']);
+        
+        echo '<table>';
+        foreach ($tabla as $row) {
+            echo '<tr>';
+            echo '<td>' . $row['id'] . "</td>";
+            echo '<td>' . $row['tipo'] . "</td>";
+            echo '<td>' . $row['zona'] . "</td>";
+            echo '<td>' . $row['direccion'] . "</td>";
+            echo '<td>' . $row['ndormitorios'] . "</td>";
+            echo '<td>' . $row['precio'] . "</td>";
+            echo '</tr>';
         }
+        echo '</table>';
     } catch (SoapFault $e) {
         echo "ERROR: " . $e->getMessage();
     }

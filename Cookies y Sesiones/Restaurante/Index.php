@@ -17,10 +17,8 @@ if (!isset($_SESSION['usuario'])) {
         require_once 'Controlador/PlatoController.php';
         PlatoController::carrito();
     } else if (isset($_POST['salir'])) {
-        if (isset($_COOKIE['precio'])) {
-            foreach ($_COOKIE as $key => $value) {
-                setcookie($key, '', time() - 3600);
-            }
+        foreach ($_COOKIE as $key => $value) {
+            setcookie($key, '', time() - 3600);
         }
         session_destroy();
         require_once('Vista/Login.php');

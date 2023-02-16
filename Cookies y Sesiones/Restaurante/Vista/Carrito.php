@@ -99,7 +99,6 @@
         <br>
         <table>
             <?php
-            print_r($products);
             $cont = 1;
             $precio = 0;
 
